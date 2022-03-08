@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ComputerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
         return view('home');
     });
 
+    Route::get('/computer', [ComputerController::class, 'index']);
     Route::get('/logout', [AuthCOntroller::class, 'logout']);
 });
 

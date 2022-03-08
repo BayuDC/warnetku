@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Computer</a>
+                        <a class="nav-link active" href="/computer">Computer</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Price</a>
@@ -45,7 +45,7 @@
             </div>
         </div>
     </nav>
-    <div class="container mt-4">
+    <div class="container mt-4 px-sm-0 px-4">
         @yield('content')
     </div>
 
