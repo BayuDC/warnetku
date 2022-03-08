@@ -12,6 +12,8 @@ class ComputerController extends Controller {
         ]);
     }
     public function detail(Computer $computer) {
-        dd($computer->load('type'));
+        return view('computer.detail', [
+            'computer' => $computer->load('type')
+        ]);
     }
 }
