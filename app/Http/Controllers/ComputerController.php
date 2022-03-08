@@ -11,4 +11,7 @@ class ComputerController extends Controller {
             'computers' => Computer::with('type')->get()
         ]);
     }
+    public function detail(Computer $computer) {
+        dd($computer->load('type'));
+    }
 }

@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/computer', [ComputerController::class, 'index']);
+    Route::get('/computer/{computer:id}', [ComputerController::class, 'detail']);
     Route::get('/logout', [AuthCOntroller::class, 'logout']);
 });
 
