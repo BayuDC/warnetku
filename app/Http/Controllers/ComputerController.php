@@ -16,4 +16,7 @@ class ComputerController extends Controller {
             'computer' => $computer->load('type')
         ]);
     }
+    public function add() {
+        return view('computer.add');
+    }
 }

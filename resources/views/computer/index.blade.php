@@ -15,6 +15,11 @@
         </a>
     </div>
     @endforeach
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+        <a href="/computer/add" class="p-4 bg-light border border-success d-block text-success h-100">
+            <h3>Add Computer +</h3>
+        </a>
+    </div>
 </div>
 
 @endsection
