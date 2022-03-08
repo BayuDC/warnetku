@@ -14,9 +14,9 @@
                 <label for="type" class="form-label">Type</label>
                 <select name="type" id="type" class="form-select" required>
                     <option selected>Computer Type...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    @foreach($types as $type)
+                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    @endforeach
                 </select>
             </div>
             <button class="btn btn-success d-block" type="submit">Save</button>

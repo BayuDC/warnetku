@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Computer;
+use App\Models\ComputerType;
 
 class ComputerController extends Controller {
     public function index() {
@@ -17,6 +18,8 @@ class ComputerController extends Controller {
         ]);
     }
     public function add() {
-        return view('computer.add');
+        return view('computer.add', [
+            'types' => ComputerType::all()
+        ]);
     }
 }
