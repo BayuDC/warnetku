@@ -3,7 +3,7 @@
 
 <h1 class="pb-3">Detail Computer - {{ $computer->name }}</h1>
 <div class="row">
-    <div class="col-6">
+    <div class="col-lg-4 col-md-8">
         <table class="table">
             <tbody>
                 <tr>
