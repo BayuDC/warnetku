@@ -8,11 +8,11 @@
                 <h2>Warnetku - Login</h2>
             </div>
             <div class="mb-3">
-                <label for="email" id="email" name="email" class="form-label">Email</label>
-                <input type="text" name="email" id="email" class="form-control">
+                <label for="username" name="username" class="form-label">Username</label>
+                <input type="text" name="username" id="email" class="form-control">
             </div>
             <div class="mb-4">
-                <label for=" password" id="password" name="password" class="form-label">Password</label>
+                <label for=" password" name="password" class="form-label">Password</label>
                 <input type="password" name="email" id="password" class="form-control">
             </div>
             <div>
