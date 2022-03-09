@@ -28,7 +28,7 @@
                         <a class="nav-link active" href="/price">Price</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Operator</a>
+                        <a class="nav-link active" href="/operator">Operator</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Transaction</a>

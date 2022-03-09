@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ComputerController;
 use App\Http\Controllers\PriceController;
+use App\Http\Controllers\OperatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/price/{rental:id}', [PriceController::class, 'update']);
     Route::delete('/price/{rental:id}', [PriceController::class, 'delete']);
 
-    Route::get('/logout', [AuthCOntroller::class, 'logout']);
+    Route::get('/operator', [OperatorController::class, 'index']);
+
+    Route::get('/logout', [AuthController::class, 'logout']);
 });
 
 Route::middleware('guest')->group(function () {
