@@ -21,7 +21,7 @@
             </tbody>
         </table>
         <div class="pt-2">
-            <a href="/computer/edit/{{ $rental->id }}" class="btn btn-primary">Edit</a>
+            <a href="/price/edit/{{ $rental->id }}" class="btn btn-primary">Edit</a>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Delete</button>
 
             <div class="modal fade" id="modalDelete" tabindex="-1">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <form action="/computer/{{ $rental->id }}" method="post">
+                            <form action="/price/{{ $rental->id }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Delete</button>

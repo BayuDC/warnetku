@@ -31,8 +31,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/price', [PriceController::class, 'index']);
     Route::get('/price/add', [PriceController::class, 'add']);
+    Route::get('/price/edit/{rental:id}', [PriceController::class, 'edit']);
     Route::get('/price/{rental:id}', [PriceController::class, 'detail']);
     Route::post('/price', [PriceController::class, 'create']);
+    Route::put('/price/{rental:id}', [PriceController::class, 'update']);
 
     Route::get('/logout', [AuthCOntroller::class, 'logout']);
 });

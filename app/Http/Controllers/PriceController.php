@@ -24,6 +24,12 @@ class PriceController extends Controller {
             'types' => ComputerType::all()
         ]);
     }
+    public function edit(RentalPrice $rental) {
+        return view('price.edit', [
+            'rental' => $rental,
+            'types' => ComputerType::all()
+        ]);
+    }
     public function create(Request $request) {
         $request->validate([
             'price' => 'required|integer',
@@ -32,6 +38,21 @@ class PriceController extends Controller {
         ]);
 
         $rental = new RentalPrice();
+
+        $rental->price = $request->price;
+        $rental->duration = $request->duration;
+        $rental->type_id = $request->type;
+
+        $rental->save();
+
+        return redirect('/price');
+    }
+    public function update(RentalPrice $rental, Request $request) {
+        $request->validate([
+            'price' => 'required|integer',
+            'duration' => 'required|integer',
+            'type' => 'required'
+        ]);
 
         $rental->price = $request->price;
         $rental->duration = $request->duration;
