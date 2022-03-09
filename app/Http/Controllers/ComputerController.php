@@ -22,6 +22,12 @@ class ComputerController extends Controller {
             'types' => ComputerType::all()
         ]);
     }
+    public function edit(Computer $computer) {
+        return view('computer.edit', [
+            'computer' => $computer,
+            'types' => ComputerType::all()
+        ]);
+    }
     public function create(Request $request) {
         $request->validate([
             'name' => 'required|regex:/^[0-9a-zA-Z\s\-]+$/',
@@ -36,5 +42,8 @@ class ComputerController extends Controller {
         $computer->save();
 
         return redirect('/computer');
+    }
+    public function update(Computer $computer, Request $request) {
+        return 'Update data';
     }
 }

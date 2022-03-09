@@ -22,8 +22,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/computer', [ComputerController::class, 'index']);
     Route::get('/computer/add', [ComputerController::class, 'add']);
+    Route::get('/computer/edit/{computer:id}', [ComputerController::class, 'edit']);
     Route::get('/computer/{computer:id}', [ComputerController::class, 'detail']);
     Route::post('/computer', [ComputerController::class, 'create']);
+    Route::put('/computer/{computer:id}', [ComputerController::class, 'update']);
 
     Route::get('/logout', [AuthCOntroller::class, 'logout']);
 });

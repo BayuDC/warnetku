@@ -17,7 +17,7 @@
             </tbody>
         </table>
         <div class="pt-2">
-            <a href="#" class="btn btn-primary btn-sm">Update</a>
+            <a href="/computer/edit/{{ $computer->id }}" class="btn btn-primary btn-sm">Edit</a>
             <a href="#" class="btn btn-danger btn-sm">Delete</a>
         </div>
     </div>
