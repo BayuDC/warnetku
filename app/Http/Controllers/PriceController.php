@@ -10,7 +10,7 @@ class PriceController extends Controller {
 
     public function index() {
         return view('price.index', [
-            'gaming_prices' =>  ComputerType::where('type_id', 1)->get(),
+            'gaming_prices' =>  RentalPrice::where('type_id', 1)->get(),
             'office_prices' =>  RentalPrice::where('type_id', 2)->get()
         ]);
     }
@@ -23,5 +23,22 @@ class PriceController extends Controller {
         return view('price.add', [
             'types' => ComputerType::all()
         ]);
+    }
+    public function create(Request $request) {
+        $request->validate([
+            'price' => 'required|integer',
+            'duration' => 'required|integer',
+            'type' => 'required'
+        ]);
+
+        $rental = new RentalPrice();
+
+        $rental->price = $request->price;
+        $rental->duration = $request->duration;
+        $rental->type_id = $request->type;
+
+        $rental->save();
+
+        return redirect('/price');
     }
 }

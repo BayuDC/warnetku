@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-lg-4 col-md-8">
-        <form action="/computer" method="post">
+        <form action="/price" method="post">
             @csrf
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
