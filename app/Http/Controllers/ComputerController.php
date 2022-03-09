@@ -22,4 +22,12 @@ class ComputerController extends Controller {
             'types' => ComputerType::all()
         ]);
     }
+    public function create(Request $request) {
+        $validated = $request->validate([
+            'name' => 'required|regex:/^[0-9a-zA-Z\s\-]+$/',
+            'type_id' => 'required'
+        ]);
+
+        dd($validated);
+    }
 }
