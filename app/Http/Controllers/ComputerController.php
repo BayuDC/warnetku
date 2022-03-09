@@ -44,6 +44,16 @@ class ComputerController extends Controller {
         return redirect('/computer');
     }
     public function update(Computer $computer, Request $request) {
-        return 'Update data';
+        $request->validate([
+            'name' => 'required|regex:/^[0-9a-zA-Z\s\-]+$/',
+            'type' => 'required'
+        ]);
+
+        $computer->name = $request->name;
+        $computer->type_id = $request->type;
+
+        $computer->save();
+
+        return redirect('/computer');
     }
 }
