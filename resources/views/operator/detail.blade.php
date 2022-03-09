@@ -21,7 +21,7 @@
             </tbody>
         </table>
         <div class="pt-2">
-            <a href="/operator/edit/{{ $operator->username }}" class="btn btn-primary">Edit</a>
+            <a href="/operator/{{ $operator->username }}/edit" class="btn btn-primary">Edit</a>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Delete</button>
 
             <div class="modal fade" id="modalDelete" tabindex="-1">

@@ -12,13 +12,13 @@ class ComputerController extends Controller {
             'computers' => Computer::with('type')->get()
         ]);
     }
-    public function detail(Computer $computer) {
-        return view('computer.detail', [
+    public function show(Computer $computer) {
+        return view('computer.show', [
             'computer' => $computer->load('type')
         ]);
     }
-    public function add() {
-        return view('computer.add', [
+    public function create() {
+        return view('computer.create', [
             'types' => ComputerType::all()
         ]);
     }
@@ -28,7 +28,7 @@ class ComputerController extends Controller {
             'types' => ComputerType::all()
         ]);
     }
-    public function create(Request $request) {
+    public function store(Request $request) {
         $request->validate([
             'name' => 'required|regex:/^[0-9a-zA-Z\s\-]+$/',
             'type' => 'required'
@@ -56,7 +56,7 @@ class ComputerController extends Controller {
 
         return redirect('/computer');
     }
-    public function delete(Computer $computer) {
+    public function destroy(Computer $computer) {
         $computer->delete();
 
         return redirect('/computer');

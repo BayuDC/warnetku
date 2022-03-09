@@ -3,7 +3,7 @@
 
 <div class="mb-3 d-sm-flex d-block align-items-center">
     <h1 class="">Manage Operators</h1>
-    <a href="/operator/add" class="btn btn-outline-success ms-auto btn-lg">Add Operator</a>
+    <a href="/operator/create" class="btn btn-outline-success ms-auto btn-lg">Add Operator</a>
 </div>
 
 <div class="row">

@@ -3,7 +3,7 @@
 
 <div class="mb-3 d-sm-flex d-block align-items-center">
     <h1 class="">Manage Rental Prices</h1>
-    <a href="/price/add" class="btn btn-outline-success ms-auto btn-lg">Add Rental Price</a>
+    <a href="/price/create" class="btn btn-outline-success ms-auto btn-lg">Add Rental Price</a>
 </div>
 
 <div class="row">

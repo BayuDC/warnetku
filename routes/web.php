@@ -23,23 +23,23 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/computer', [ComputerController::class, 'index']);
-    Route::get('/computer/add', [ComputerController::class, 'add']);
-    Route::get('/computer/edit/{computer:id}', [ComputerController::class, 'edit']);
-    Route::get('/computer/{computer:id}', [ComputerController::class, 'detail']);
-    Route::post('/computer', [ComputerController::class, 'create']);
+    Route::get('/computer/create', [ComputerController::class, 'create']);
+    Route::post('/computer', [ComputerController::class, 'store']);
+    Route::get('/computer/{computer:id}', [ComputerController::class, 'show']);
+    Route::get('/computer/{computer:id}/edit', [ComputerController::class, 'edit']);
     Route::put('/computer/{computer:id}', [ComputerController::class, 'update']);
-    Route::delete('/computer/{computer:id}', [ComputerController::class, 'delete']);
+    Route::delete('/computer/{computer:id}', [ComputerController::class, 'destroy']);
 
     Route::get('/price', [PriceController::class, 'index']);
-    Route::get('/price/add', [PriceController::class, 'add']);
-    Route::get('/price/edit/{rental:id}', [PriceController::class, 'edit']);
-    Route::get('/price/{rental:id}', [PriceController::class, 'detail']);
-    Route::post('/price', [PriceController::class, 'create']);
+    Route::get('/price/create', [PriceController::class, 'create']);
+    Route::post('/price', [PriceController::class, 'store']);
+    Route::get('/price/{rental:id}', [PriceController::class, 'show']);
+    Route::get('/price/{rental:id}/edit', [PriceController::class, 'edit']);
     Route::put('/price/{rental:id}', [PriceController::class, 'update']);
-    Route::delete('/price/{rental:id}', [PriceController::class, 'delete']);
+    Route::delete('/price/{rental:id}', [PriceController::class, 'destroy']);
 
     Route::get('/operator', [OperatorController::class, 'index']);
-    Route::get('/operator/{operator:username}', [OperatorController::class, 'detail']);
+    Route::get('/operator/{operator:username}', [OperatorController::class, 'show']);
 
     Route::get('/logout', [AuthController::class, 'logout']);
 });

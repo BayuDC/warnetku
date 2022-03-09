@@ -14,13 +14,13 @@ class PriceController extends Controller {
             'office_prices' =>  RentalPrice::where('type_id', 2)->get()
         ]);
     }
-    public function detail(RentalPrice $rental) {
-        return view('price.detail', [
+    public function show(RentalPrice $rental) {
+        return view('price.show', [
             'rental' => $rental->load('type')
         ]);
     }
-    public function add() {
-        return view('price.add', [
+    public function create() {
+        return view('price.create', [
             'types' => ComputerType::all()
         ]);
     }
@@ -30,7 +30,7 @@ class PriceController extends Controller {
             'types' => ComputerType::all()
         ]);
     }
-    public function create(Request $request) {
+    public function store(Request $request) {
         $request->validate([
             'price' => 'required|integer',
             'duration' => 'required|integer',
@@ -62,7 +62,7 @@ class PriceController extends Controller {
 
         return redirect('/price');
     }
-    public function delete(RentalPrice $rental) {
+    public function destroy(RentalPrice $rental) {
         $rental->delete();
 
         return redirect('/price');
