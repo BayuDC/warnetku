@@ -21,7 +21,7 @@
                     <td>Rp. {{ $rental->price }}</td>
                     <td>{{ $rental->duration }} Hours</td>
                     <td class="col-1">
-                        <a href="" class="btn btn-sm btn-primary">
+                        <a href="/price/{{ $rental->id }}" class="btn btn-sm btn-primary">
                             Detail
                         </a>
                     </td>
@@ -49,7 +49,7 @@
                     <td>Rp. {{ $rental->price }}</td>
                     <td>{{ $rental->duration }} Hours</td>
                     <td class="col-1">
-                        <a href="" class="btn btn-sm btn-primary">
+                        <a href="/price/{{ $rental->id }}" class="btn btn-sm btn-primary">
                             Detail
                         </a>
                     </td>

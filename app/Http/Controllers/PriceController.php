@@ -13,4 +13,9 @@ class PriceController extends Controller {
             'office_prices' =>  RentalPrice::where('type_id', 2)->get()
         ]);
     }
+    public function detail(RentalPrice $rental) {
+        return view('price.detail', [
+            'rental' => $rental->load('type')
+        ]);
+    }
 }

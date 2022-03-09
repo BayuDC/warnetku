@@ -29,7 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/computer/{computer:id}', [ComputerController::class, 'update']);
     Route::delete('/computer/{computer:id}', [ComputerController::class, 'delete']);
 
-    Route::get('/price', [PRiceController::class, 'index']);
+    Route::get('/price', [PriceController::class, 'index']);
+    Route::get('/price/{rental:id}', [PriceController::class, 'detail']);
 
     Route::get('/logout', [AuthCOntroller::class, 'logout']);
 });
