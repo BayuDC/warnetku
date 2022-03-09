@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Operator;
 use App\Models\Computer;
 use App\Models\ComputerType;
+use App\Models\RentalPrice;
 
 class DatabaseSeeder extends Seeder {
     /**
@@ -29,15 +30,36 @@ class DatabaseSeeder extends Seeder {
 
         Computer::create([
             'name' => 'PC 1',
-            'type_id' => '1'
+            'type_id' => 1
         ]);
         Computer::create([
             'name' => 'PC 2',
-            'type_id' => '1'
+            'type_id' => 1
         ]);
         Computer::create([
             'name' => 'PC 3',
-            'type_id' => '2'
+            'type_id' => 2
+        ]);
+
+        RentalPrice::create([
+            'price' => 5000,
+            'duration' => 1,
+            'type_id' => 1
+        ]);
+        RentalPrice::create([
+            'price' => 9000,
+            'duration' => 2,
+            'type_id' => 1
+        ]);
+        RentalPrice::create([
+            'price' => 3000,
+            'duration' => 1,
+            'type_id' => 2
+        ]);
+        RentalPrice::create([
+            'price' => 5000,
+            'duration' => 2,
+            'type_id' => 2
         ]);
     }
 }
