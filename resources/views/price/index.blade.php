@@ -23,7 +23,7 @@
                 <tr>
                     <th scope="row" class="col-1">{{ $i + 1 }}</th>
                     <td>Rp. {{ $rental->price }}</td>
-                    <td>{{ $rental->duration }} Hours</td>
+                    <td>{{ $rental->duration }} Hour{{ $rental->duration > 1 ? 's' : '' }}</td>
                     <td class="col-1">
                         <a href="/price/{{ $rental->id }}" class="btn btn-sm btn-primary">
                             Detail

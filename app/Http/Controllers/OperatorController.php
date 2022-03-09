@@ -11,4 +11,9 @@ class OperatorController extends Controller {
             'operators' => Operator::with('role')->get()
         ]);
     }
+    public function detail(Operator $operator) {
+        return view('operator.detail', [
+            'operator' => $operator->load('role')
+        ]);
+    }
 }
