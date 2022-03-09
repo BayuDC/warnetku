@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/price/{rental:id}', [PriceController::class, 'destroy']);
 
     Route::get('/operator', [OperatorController::class, 'index']);
+    Route::get('/operator/create', [OperatorController::class, 'create']);
     Route::get('/operator/{operator:username}', [OperatorController::class, 'show']);
 
     Route::get('/logout', [AuthController::class, 'logout']);

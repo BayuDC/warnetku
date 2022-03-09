@@ -20,6 +20,7 @@
                 </tr>
             </tbody>
         </table>
+        @can('manage-operator')
         <div class="pt-2">
             <a href="/operator/{{ $operator->username }}/edit" class="btn btn-primary">Edit</a>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Delete</button>
@@ -45,6 +46,7 @@
                 </div>
             </div>
         </div>
+        @endcan
     </div>
 </div>
 
