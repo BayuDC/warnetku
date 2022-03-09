@@ -8,6 +8,7 @@ use App\Models\Operator;
 use App\Models\Computer;
 use App\Models\ComputerType;
 use App\Models\RentalPrice;
+use App\Models\Role;
 
 class DatabaseSeeder extends Seeder {
     /**
@@ -16,13 +17,20 @@ class DatabaseSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        Role::create(['name' => 'Owner']);
+        Role::create(['name' => 'Worker']);
+
         Operator::create([
+            'fullname' => 'Admin 1',
             'username' => 'admin1',
-            'password' => bcrypt('admin1')
+            'password' => bcrypt('admin1'),
+            'role_id' => 1
         ]);
         Operator::create([
+            'fullname' => 'Admin 2',
             'username' => 'admin2',
-            'password' => bcrypt('admin2')
+            'password' => bcrypt('admin2'),
+            'role_id' => 2
         ]);
 
         ComputerType::create(['name' => 'Gaming']);
