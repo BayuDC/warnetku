@@ -1,7 +1,10 @@
 @extends('layouts.main')
 @section('content')
 
-<h1 class="pb-3">Manage Rental Prices</h1>
+<div class="mb-3 d-sm-flex d-block align-items-center">
+    <h1 class="">Manage Rental Prices</h1>
+    <a href="/price/add" class="btn btn-outline-success ms-auto btn-lg">Add Rental Price</a>
+</div>
 
 <div class="row">
     <h3>Gaming</h3>
@@ -12,6 +15,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Price</th>
                     <th scope="col">Duration</th>
+                    <th scope="col">Detail</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +44,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Price</th>
                     <th scope="col">Duration</th>
+                    <th scope="col">Detail</th>
                 </tr>
             </thead>
             <tbody>
