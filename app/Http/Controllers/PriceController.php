@@ -62,4 +62,9 @@ class PriceController extends Controller {
 
         return redirect('/price');
     }
+    public function delete(RentalPrice $rental) {
+        $rental->delete();
+
+        return redirect('/price');
+    }
 }

@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/price/{rental:id}', [PriceController::class, 'detail']);
     Route::post('/price', [PriceController::class, 'create']);
     Route::put('/price/{rental:id}', [PriceController::class, 'update']);
+    Route::delete('/price/{rental:id}', [PriceController::class, 'delete']);
 
     Route::get('/logout', [AuthCOntroller::class, 'logout']);
 });
