@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <div class="container">
-            <a class="navbar-brand" href="#">Warnetku</a>
+            <a class="navbar-brand" href="/">Warnetku</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -25,7 +25,7 @@
                         <a class="nav-link active" href="/computer">Computer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Price</a>
+                        <a class="nav-link active" href="/price">Price</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Operator</a>

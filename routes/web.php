@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ComputerController;
+use App\Http\Controllers\PriceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/computer', [ComputerController::class, 'create']);
     Route::put('/computer/{computer:id}', [ComputerController::class, 'update']);
     Route::delete('/computer/{computer:id}', [ComputerController::class, 'delete']);
+
+    Route::get('/price', [PRiceController::class, 'index']);
 
     Route::get('/logout', [AuthCOntroller::class, 'logout']);
 });
