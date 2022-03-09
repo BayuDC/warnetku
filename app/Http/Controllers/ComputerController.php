@@ -23,11 +23,18 @@ class ComputerController extends Controller {
         ]);
     }
     public function create(Request $request) {
-        $validated = $request->validate([
+        $request->validate([
             'name' => 'required|regex:/^[0-9a-zA-Z\s\-]+$/',
-            'type_id' => 'required'
+            'type' => 'required'
         ]);
 
-        dd($validated);
+        $computer = new Computer;
+
+        $computer->name = $request->name;
+        $computer->type_id = $request->type;
+
+        $computer->save();
+
+        return redirect('/computer');
     }
 }

@@ -16,15 +16,15 @@
             </div>
             <div class="mb-4">
                 <label for="type" class="form-label">Type</label>
-                <select name="type_id" id="type" class="form-select @error('type_id') is-invalid @enderror">
+                <select name="type" id="type" class="form-select @error('type') is-invalid @enderror">
                     <option selected></option>
                     @foreach($types as $type)
-                    <option value="{{ $type->id }}" @if(old('type_id')==$type->id) selected @endif>
+                    <option value="{{ $type->id }}" @if(old('type')==$type->id) selected @endif>
                         {{ $type->name }}
                     </option>
                     @endforeach
                 </select>
-                @error('type_id')
+                @error('type')
                 <small class="text-danger text-end d-block mt-2">{{ $message }}</small>
                 @enderror
             </div>
