@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/operator', [OperatorController::class, 'index']);
     Route::get('/operator/create', [OperatorController::class, 'create']);
+    Route::post('/operator', [OperatorController::class, 'store']);
     Route::get('/operator/{operator:username}', [OperatorController::class, 'show']);
 
     Route::get('/logout', [AuthController::class, 'logout']);

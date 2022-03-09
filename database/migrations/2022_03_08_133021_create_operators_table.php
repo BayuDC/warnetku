@@ -14,7 +14,7 @@ return new class extends Migration {
         Schema::create('operators', function (Blueprint $table) {
             $table->id();
             $table->string('fullname');
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('password');
             $table->foreignId('role_id');
         });

@@ -14,7 +14,7 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Fullname</th>
+                    <th scope="col">Full Name</th>
                     <th scope="col">Username</th>
                     <th scope="col">Role</th>
                     <th scope="col">Detail</th>
