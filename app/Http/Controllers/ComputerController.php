@@ -56,4 +56,9 @@ class ComputerController extends Controller {
 
         return redirect('/computer');
     }
+    public function delete(Computer $computer) {
+        $computer->delete();
+
+        return redirect('/computer');
+    }
 }

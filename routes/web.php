@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/computer/{computer:id}', [ComputerController::class, 'detail']);
     Route::post('/computer', [ComputerController::class, 'create']);
     Route::put('/computer/{computer:id}', [ComputerController::class, 'update']);
+    Route::delete('/computer/{computer:id}', [ComputerController::class, 'delete']);
 
     Route::get('/logout', [AuthCOntroller::class, 'logout']);
 });
