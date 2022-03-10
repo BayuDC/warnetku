@@ -14,11 +14,11 @@ return new class extends Migration {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('customer');
-            $table->dateTime('date_from');
-            $table->dateTime('date_to');
-            $table->integer('total_price');
-            $table->foreignId('computer_id');
-            $table->foreignId('operator_id');
+            $table->timestamp('time_start')->nullable();
+            $table->timestamp('time_end')->nullable();
+            $table->integer('bill');
+            $table->foreignId('computer_id')->nullable();
+            $table->foreignId('operator_id')->nullable();
         });
     }
 

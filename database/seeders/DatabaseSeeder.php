@@ -8,7 +8,9 @@ use App\Models\Operator;
 use App\Models\Computer;
 use App\Models\ComputerType;
 use App\Models\RentalPrice;
+use App\Models\Transaction;
 use App\Models\Role;
+use Carbon\CarbonImmutable as Carbon;
 
 class DatabaseSeeder extends Seeder {
     /**
@@ -68,6 +70,23 @@ class DatabaseSeeder extends Seeder {
             'price' => 5000,
             'duration' => 2,
             'type_id' => 2
+        ]);
+
+        Transaction::create([
+            'customer' => 'Customer 1',
+            'time_start' => Carbon::now(),
+            'time_end' => Carbon::now()->add(1, 'hour'),
+            'bill' => 3000,
+            'computer_id' => 3,
+            'operator_id' => 1
+        ]);
+        Transaction::create([
+            'customer' => 'Customer 2',
+            'time_start' => Carbon::now(),
+            'time_end' => Carbon::now()->add(2, 'hour'),
+            'bill' => 9000,
+            'computer_id' => 2,
+            'operator_id' => 2
         ]);
     }
 }
