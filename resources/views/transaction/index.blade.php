@@ -3,7 +3,7 @@
 
 <div class="mb-3 d-sm-flex d-block align-items-center justify-content-between">
     <h1>Manage Transactions</h1>
-    <a href="" class="btn btn-lg btn-outline-success">Add Transaction</a>
+    <a href="/transaction/create" class="btn btn-lg btn-outline-success">Add Transaction</a>
 </div>
 
 <div class="row">

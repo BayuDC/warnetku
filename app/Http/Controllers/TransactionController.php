@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use App\Models\Computer;
 use Carbon\Carbon;
 
 class TransactionController extends Controller {
@@ -18,6 +19,11 @@ class TransactionController extends Controller {
 
         return view('transaction.show', [
             'transaction' => $transaction->load(['operator', 'computer'])
+        ]);
+    }
+    public function create() {
+        return view('transaction.create', [
+            'computers' => Computer::all()
         ]);
     }
 }
