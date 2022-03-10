@@ -16,11 +16,11 @@
                 </tr>
                 <tr>
                     <th scope="row" class="col-3">Time Start</th>
-                    <td>{{ $transaction->time_start }}</td>
+                    <td>{{ $transaction['time_start'] }}</td>
                 </tr>
                 <tr>
                     <th scope="row" class="col-3">Time End</th>
-                    <td>{{ $transaction->time_end }}</td>
+                    <td>{{ $transaction['time_end'] }}</td>
                 </tr>
                 <tr>
                     <th>Total Bill</th>
