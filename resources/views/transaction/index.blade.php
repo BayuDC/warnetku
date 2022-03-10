@@ -24,7 +24,7 @@
                 <tr>
                     <th class="col-1">{{ $i + 1 }}</th>
                     <td>{{ $transaction->customer }}</td>
-                    <td>{{ $transaction->duration }} Hour</td>
+                    <td>{{ $transaction->duration }} Hour{{ $transaction->duration > 1 ? 's' : '' }}</td>
                     <td>Rp. {{ $transaction->bill }}</td>
                     <td>{{ $transaction->computer->name }}</td>
                     <td class="col-1">

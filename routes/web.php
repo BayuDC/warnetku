@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/operator/{operator:id}', [OperatorController::class, 'destroy']);
 
     Route::get('/transaction', [TransactionController::class, 'index']);
+    Route::get('/transaction/{transaction:id}', [TransactionController::class, 'show']);
 
     Route::get('/logout', [AuthController::class, 'logout']);
 });

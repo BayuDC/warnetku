@@ -33,9 +33,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="/transaction">Transaction</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">History</a>
-                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
