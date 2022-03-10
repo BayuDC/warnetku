@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Transaction;
 use App\Models\Computer;
 use Carbon\Carbon;
@@ -37,6 +38,19 @@ class TransactionController extends Controller {
             'computer' => 'required',
             'duration' => 'required|integer'
         ]);
+
+        $transaction = new Transaction;
+
+        $transaction->customer = $request->customer;
+        $transaction->time_start = Carbon::now();
+        $transaction->time_end = Carbon::now()->addHour($request->duration);
+        $transaction->bill = 0; // ! temp
+        $transaction->computer_id = $request->computer;
+        $transaction->operator_id = Auth::user()->id;
+
+        $transaction->save();
+
+        return redirect('/transaction');
     }
     public function update(Transaction $transaction, Request $request) {
         $request->validate([
