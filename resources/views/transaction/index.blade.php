@@ -13,9 +13,9 @@
                 <tr>
                     <th>#</th>
                     <th>Customer</th>
-                    <th>Duration</th>
-                    <th>Bill</th>
                     <th>Computer</th>
+                    <th>Duration</th>
+                    <th>Status</th>
                     <th>Detail</th>
                 </tr>
             </thead>
@@ -24,9 +24,9 @@
                 <tr>
                     <th class="col-1">{{ $i + 1 }}</th>
                     <td>{{ $transaction->customer }}</td>
-                    <td>{{ $transaction->duration }} Hour{{ $transaction->duration > 1 ? 's' : '' }}</td>
-                    <td>Rp. {{ $transaction->bill }}</td>
                     <td>{{ $transaction->computer->name }}</td>
+                    <td>{{ $transaction->duration }} Hour{{ $transaction->duration > 1 ? 's' : '' }}</td>
+                    <td>{{ $transaction->status }}</td>
                     <td class="col-1">
                         <a href="/transaction/{{ $transaction->id }}" class="btn btn-sm btn-primary">Detail</a>
                     </td>

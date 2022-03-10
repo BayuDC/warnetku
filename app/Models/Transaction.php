@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Operator;
 use App\Models\Computer;
+use Carbon\Carbon;
 
 class Transaction extends Model {
     use HasFactory;
@@ -17,6 +18,7 @@ class Transaction extends Model {
         static::addGlobalScope(function (Builder $builder) {
             $builder->select($builder->getQuery()->from . '.*');
             $builder->addSelect(\DB::raw('TIMESTAMPDIFF(hour, time_start, time_end) as duration'));
+            $builder->addSelect(\DB::raw("IF('" . Carbon::now()->toDateTimeString() . "' BETWEEN time_start AND time_end, 'Ongoing', 'Done') as status"));
         });
     }
 

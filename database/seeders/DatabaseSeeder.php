@@ -74,8 +74,8 @@ class DatabaseSeeder extends Seeder {
 
         Transaction::create([
             'customer' => 'Customer 1',
-            'time_start' => Carbon::now(),
-            'time_end' => Carbon::now()->add(1, 'hour'),
+            'time_start' => Carbon::now()->modify('-1 hour'),
+            'time_end' => Carbon::now(),
             'bill' => 3000,
             'computer_id' => 3,
             'operator_id' => 1
@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder {
         Transaction::create([
             'customer' => 'Customer 2',
             'time_start' => Carbon::now(),
-            'time_end' => Carbon::now()->add(2, 'hour'),
+            'time_end' => Carbon::now()->modify('+2 hour'),
             'bill' => 9000,
             'computer_id' => 2,
             'operator_id' => 2

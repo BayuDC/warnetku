@@ -11,6 +11,10 @@
                     <td>{{ $transaction->customer }}</td>
                 </tr>
                 <tr>
+                    <th>Computer</th>
+                    <td>{{ $transaction->computer->name }}</td>
+                </tr>
+                <tr>
                     <th scope="row" class="col-3">Duration</th>
                     <td>{{ $transaction->duration }} Hour{{ $transaction->duration > 1 ? 's' : '' }}</td>
                 </tr>
@@ -27,8 +31,8 @@
                     <td>Rp. {{ $transaction->bill }}</td>
                 </tr>
                 <tr>
-                    <th>Computer</th>
-                    <td>{{ $transaction->computer->name }}</td>
+                    <th>Status</th>
+                    <td>{{ $transaction->status }}</td>
                 </tr>
                 <tr>
                     <th>Added By</th>
