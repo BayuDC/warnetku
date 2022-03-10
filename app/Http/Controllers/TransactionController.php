@@ -23,7 +23,12 @@ class TransactionController extends Controller {
     }
     public function create() {
         return view('transaction.create', [
-            'computers' => Computer::all()
+            'computers' => Computer::with([
+                'transactions' => function ($query) {
+                    $now = Carbon::now()->toDateTimeString();
+                    $query->whereRaw("'{$now}' BETWEEN time_start AND time_end");
+                },
+            ])->with('type')->get()
         ]);
     }
 }

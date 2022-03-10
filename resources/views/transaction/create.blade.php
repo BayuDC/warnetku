@@ -19,9 +19,11 @@
                 <select name="computer" id="computer" class="form-select @error('type') is-invalid @enderror">
                     <option selected></option>
                     @foreach($computers as $computer)
-                    <option value="{{ $computer->id }}" @if(old('computer')==$computer->id) selected @endif>
+                    @if($computer->transactions->count() == 0)
+                    <option value="{{ $computer->id }}" @if($computer->id == old('computer')) selected @endif>
                         {{ $computer->name }}
                     </option>
+                    @endif
                     @endforeach
                 </select>
                 @error('computer')
