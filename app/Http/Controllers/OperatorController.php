@@ -22,6 +22,13 @@ class OperatorController extends Controller {
 
         return view('operator.create');
     }
+    public function edit(Operator $operator) {
+        if (Gate::denies('manage-operator')) abort(403);
+
+        return view('operator.edit', [
+            'operator' => $operator
+        ]);
+    }
     public function store(Request $request) {
         if (Gate::denies('manage-operator')) abort(403);
 

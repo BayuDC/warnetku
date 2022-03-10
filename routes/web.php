@@ -42,6 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/operator/create', [OperatorController::class, 'create']);
     Route::post('/operator', [OperatorController::class, 'store']);
     Route::get('/operator/{operator:username}', [OperatorController::class, 'show']);
+    Route::get('/operator/{operator:username}/edit', [OperatorController::class, 'edit']);
+    Route::put('/operator/{operator:id}', [OperatorController::class, 'update']);
 
     Route::get('/logout', [AuthController::class, 'logout']);
 });
