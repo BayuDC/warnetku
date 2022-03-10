@@ -31,4 +31,18 @@ class TransactionController extends Controller {
             ])->with('type')->get()
         ]);
     }
+    public function store(Request $request) {
+        $request->validate([
+            'customer' => 'required|regex:/^[a-zA-Z\s0-9]+$/',
+            'computer' => 'required',
+            'duration' => 'required|integer'
+        ]);
+    }
+    public function update(Transaction $transaction, Request $request) {
+        $request->validate([
+            'customer' => 'required|regex:/^[a-zA-Z\s0-9]+$/',
+            'computer' => 'required',
+            'duration' => 'required|integer'
+        ]);
+    }
 }

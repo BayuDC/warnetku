@@ -31,9 +31,9 @@
                 @enderror
             </div>
             <div class="mb-4">
-                <label for="customer" class="form-label">Duration (in hour)</label>
-                <input type="text" value="{{ old('customer') }}" name="customer" id="customer" class="form-control @error('customer') is-invalid @enderror" required>
-                @error('customer')
+                <label for="duration" class="form-label">Duration (in hour)</label>
+                <input type="text" value="{{ old('duration') }}" name="duration" id="duration" class="form-control @error('duration') is-invalid @enderror" required>
+                @error('duration')
                 <small class="text-danger text-end d-block mt-2">{{ $message }}</small>
                 @enderror
             </div>
