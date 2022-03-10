@@ -49,4 +49,21 @@ class OperatorController extends Controller {
 
         return redirect('/operator');
     }
+    public function update(Operator $operator, Request $request) {
+        if (Gate::denies('manage-operator')) abort(403);
+
+        $request->validate([
+            'fullname' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'username' => 'required|unique:operators|regex:/^[a-zA-Z0-9\_]+$/',
+            'password' => 'required|confirmed|min:4'
+        ]);
+
+        $operator->fullname = $request->fullname;
+        $operator->username = $request->username;
+        $operator->password = bcrypt($request->password);
+
+        $operator->save();
+
+        return redirect('/operator');
+    }
 }
