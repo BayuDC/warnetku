@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/operator/{operator:username}', [OperatorController::class, 'show']);
     Route::get('/operator/{operator:username}/edit', [OperatorController::class, 'edit']);
     Route::put('/operator/{operator:id}', [OperatorController::class, 'update']);
+    Route::delete('/operator/{operator:id}', [OperatorController::class, 'destroy']);
 
     Route::get('/logout', [AuthController::class, 'logout']);
 });

@@ -66,4 +66,12 @@ class OperatorController extends Controller {
 
         return redirect('/operator');
     }
+    public function destroy(Operator $operator) {
+        if (Gate::denies('manage-operator')) abort(403);
+        if ($operator->role->name == 'Owner') abort(403);
+
+        $operator->delete();
+
+        return redirect('/operator');
+    }
 }

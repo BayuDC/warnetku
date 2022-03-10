@@ -23,8 +23,8 @@
         @can('manage-operator')
         <div class="pt-2">
             <a href="/operator/{{ $operator->username }}/edit" class="btn btn-primary">Edit</a>
+            @if($operator->role->name != 'Owner')
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Delete</button>
-
             <div class="modal fade" id="modalDelete" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -36,7 +36,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <form action="/operator/{{ $operator->username }}" method="post">
+                            <form action="/operator/{{ $operator->id }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -45,6 +45,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
         @endcan
     </div>
