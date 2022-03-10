@@ -8,9 +8,15 @@
     <div class="col-lg-3 col-md-4 col-sm-6 col-12">
         <a href="/computer/{{ $computer->id }}" class="p-4 bg-light border d-block text-dark text-decoration-none">
             <h3>{{ $computer->name }}</h3>
-            <div class="">{{ $computer->type->name }}</div>
-            <div class="text-muted">
+            <p class="">{{ $computer->type->name }}</p>
+            <div class="text-muted"><i class="bi bi-dot"></i>
+                @if($computer->transactions->first())
+                <small class="me-1">🔵</small>
+                Used by {{ $computer->transactions->first()->customer }}
+                @else
+                <small class="me-1">🟡</small>
                 Idle
+                @endif
             </div>
         </a>
     </div>

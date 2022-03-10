@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ComputerType;
+use App\Models\Transaction;
 
 class Computer extends Model {
     use HasFactory;
@@ -13,5 +14,9 @@ class Computer extends Model {
 
     public function type() {
         return $this->belongsTo(ComputerType::class);
+    }
+
+    public function transactions() {
+        return $this->hasMany(Transaction::class)->withOutGlobalScope('time');
     }
 }

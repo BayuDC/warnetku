@@ -12,7 +12,13 @@
                 </tr>
                 <tr>
                     <th scope="row" class="col-2">Status</th>
-                    <td>Idle</td>
+                    <td>
+                        @if($computer->transactions->first())
+                        Used by {{ $computer->transactions->first()->customer }}
+                        @else
+                        Idle
+                        @endif
+                    </td>
                 </tr>
             </tbody>
         </table>

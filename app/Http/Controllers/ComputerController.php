@@ -3,18 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\Computer;
 use App\Models\ComputerType;
 
 class ComputerController extends Controller {
+
     public function index() {
         return view('computer.index', [
-            'computers' => Computer::with('type')->get()
+            'computers' => Computer::with([
+                'transactions' => function ($query) {
+                    $now = Carbon::now()->toDateTimeString();
+                    $query->whereRaw("'{$now}' BETWEEN time_start AND time_end");
+                },
+            ])->with('type')->get()
         ]);
     }
     public function show(Computer $computer) {
         return view('computer.show', [
-            'computer' => $computer->load('type')
+            'computer' => $computer->load([
+                'transactions' => function ($query) {
+                    $now = Carbon::now()->toDateTimeString();
+                    $query->whereRaw("'{$now}' BETWEEN time_start AND time_end");
+                },
+            ])->load('type')
         ]);
     }
     public function create() {

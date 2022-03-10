@@ -15,7 +15,7 @@ class Transaction extends Model {
     public $timestamps = false;
 
     protected static function booted() {
-        static::addGlobalScope(function (Builder $builder) {
+        static::addGlobalScope('time', function (Builder $builder) {
             $builder->select($builder->getQuery()->from . '.*');
             $builder->addSelect(\DB::raw('TIMESTAMPDIFF(hour, time_start, time_end) as duration'));
             $builder->addSelect(\DB::raw("IF('" . Carbon::now()->toDateTimeString() . "' BETWEEN time_start AND time_end, 'Ongoing', 'Done') as status"));
