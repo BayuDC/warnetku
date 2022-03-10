@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ComputerController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\OperatorController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/operator/{operator:username}/edit', [OperatorController::class, 'edit']);
     Route::put('/operator/{operator:id}', [OperatorController::class, 'update']);
     Route::delete('/operator/{operator:id}', [OperatorController::class, 'destroy']);
+
+    Route::get('/transaction', [TransactionController::class, 'index']);
 
     Route::get('/logout', [AuthController::class, 'logout']);
 });

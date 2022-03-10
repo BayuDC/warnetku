@@ -31,7 +31,7 @@
                         <a class="nav-link active" href="/operator">Operator</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Transaction</a>
+                        <a class="nav-link active" href="/transaction">Transaction</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#">History</a>
