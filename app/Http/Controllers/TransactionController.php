@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Transaction;
 use App\Models\Computer;
 use App\Models\RentalPrice;
 use Carbon\Carbon;
-use PhpParser\Node\Stmt\Continue_;
 
 class TransactionController extends Controller {
     public function index() {
@@ -32,6 +32,19 @@ class TransactionController extends Controller {
                     $query->whereRaw("'{$now}' BETWEEN time_start AND time_end");
                 },
             ])->with('type')->get()
+        ]);
+    }
+    public function edit(Transaction $transaction) {
+        if (Gate::denies('manage-transaction', $transaction)) abort(403);
+
+        return view('transaction.edit', [
+            'computers' => Computer::with([
+                'transactions' => function ($query) {
+                    $now = Carbon::now()->toDateTimeString();
+                    $query->whereRaw("'{$now}' BETWEEN time_start AND time_end");
+                },
+            ])->with('type')->get(),
+            'transaction' => $transaction
         ]);
     }
     public function store(Request $request) {
