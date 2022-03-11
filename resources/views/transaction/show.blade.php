@@ -7,7 +7,7 @@
         <table class="table">
             <tbody>
                 <tr>
-                    <th scope="row" class="col-3">Customer</th>
+                    <th scope="row" class="col-4">Customer</th>
                     <td>{{ $transaction->customer }}</td>
                 </tr>
                 <tr>
@@ -15,15 +15,40 @@
                     <td>{{ $transaction->computer->name }}</td>
                 </tr>
                 <tr>
-                    <th scope="row" class="col-3">Duration</th>
-                    <td>{{ $transaction->duration }} Hour{{ $transaction->duration > 1 ? 's' : '' }}</td>
+                    <th scope="row" class="">Duration</th>
+                    <td>
+                        {{ $transaction->duration }} Hour{{ $transaction->duration > 1 ? 's' : '' }}
+                        @can('manage-transaction', $transaction)
+                        <button class="btn badge btn-success ms-2" type="button" data-bs-toggle="modal" data-bs-target="#modalAdd">Add</button>
+                        <div class="modal fade" id="modalAdd" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Add duration</h5>
+                                    </div>
+                                    <form action="/transaction/{{ $transaction->id }}/extend" method="post">
+                                        @csrf
+                                        @method('put')
+                                        <div class="modal-body">
+                                            <input type="number" min="1" max="24" class="form-control" name="duration">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-success">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        @endcan
+                    </td>
                 </tr>
                 <tr>
-                    <th scope="row" class="col-3">Time Start</th>
+                    <th scope="row" class="">Time Start</th>
                     <td>{{ $transaction['time_start'] }}</td>
                 </tr>
                 <tr>
-                    <th scope="row" class="col-3">Time End</th>
+                    <th scope="row" class="">Time End</th>
                     <td>{{ $transaction['time_end'] }}</td>
                 </tr>
                 <tr>

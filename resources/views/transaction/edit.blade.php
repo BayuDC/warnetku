@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 
-<h1 class="pb-3">Add Transaction</h1>
+<h1 class="pb-3">Edit Transaction</h1>
 
 <div class="row">
     <div class="col-lg-4 col-md-8">

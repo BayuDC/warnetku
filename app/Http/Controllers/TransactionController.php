@@ -82,6 +82,22 @@ class TransactionController extends Controller {
 
         return redirect('/transaction');
     }
+    public function extend(Transaction $transaction, Request $request) {
+        if (Gate::denies('manage-transaction', $transaction)) abort(403);
+
+        $request->validate([
+            'duration' => 'required|integer|min:1|max:24'
+        ]);
+
+        $duration = $transaction->duration + $request->duration;
+
+        $transaction->time_end = Carbon::create($transaction->time_end)->add($request->duration, 'hour');
+        $transaction->bill = $this->calcBill($duration, $transaction->computer_id);
+
+        $transaction->save();
+
+        return redirect('/transaction/' . $transaction->id);
+    }
     private function calcBill(int $duration, $computer) {
         $typeId = Computer::find($computer)->type_id;
         $prices = RentalPrice::where('type_id', $typeId)->orderBy('duration', 'desc')->get();
