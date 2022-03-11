@@ -10,14 +10,14 @@
             @method('put')
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
-                <input type="text" value="{{ old('price') ? old('price') : $rental->price }}" name="price" id="price" class="form-control @error('price') is-invalid @enderror" required>
+                <input type="number" value="{{ old('price') ? old('price') : $rental->price }}" name="price" id="price" min="1000" step="1000" class="form-control @error('price') is-invalid @enderror" required>
                 @error('price')
                 <small class="text-danger text-end d-block mt-2">{{ $message }}</small>
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="duration" class="form-label">Duration</label>
-                <input type="text" value="{{ old('duration') ? old('duration') : $rental->duration }}" name="duration" id="duration" class="form-control @error('duration') is-invalid @enderror" required>
+                <label for="duration" class="form-label">Duration (in hour)</label>
+                <input type="number" value="{{ old('duration') ? old('duration') : $rental->duration }}" name="duration" id="duration" min="1" max="24" class="form-control @error('duration') is-invalid @enderror" required>
                 @error('duration')
                 <small class="text-danger text-end d-block mt-2">{{ $message }}</small>
                 @enderror
