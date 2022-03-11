@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Transaction;
 use App\Models\Computer;
+use App\Models\RentalPrice;
 use Carbon\Carbon;
+use PhpParser\Node\Stmt\Continue_;
 
 class TransactionController extends Controller {
     public function index() {
@@ -44,7 +46,7 @@ class TransactionController extends Controller {
         $transaction->customer = $request->customer;
         $transaction->time_start = Carbon::now();
         $transaction->time_end = Carbon::now()->addHour($request->duration);
-        $transaction->bill = 0; // ! temp
+        $transaction->bill = $this->calcBill((int)$request->duration, $request->computer);
         $transaction->computer_id = $request->computer;
         $transaction->operator_id = Auth::user()->id;
 
@@ -58,5 +60,21 @@ class TransactionController extends Controller {
             'computer' => 'required',
             'duration' => 'required|integer'
         ]);
+    }
+    private function calcBill(int $duration, $computer) {
+        $typeId = Computer::find($computer)->type_id;
+        $prices = RentalPrice::where('type_id', $typeId)->orderBy('duration', 'desc')->get();
+
+        $bill = 0;
+
+        foreach ($prices as $price) {
+            $count = (int)($duration / $price->duration);
+            $duration -= $count * $price->duration;
+            $bill += $price->price * $count;
+
+            if ($duration == 0) break;
+        }
+
+        return $bill;
     }
 }
