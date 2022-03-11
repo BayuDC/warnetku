@@ -40,10 +40,33 @@
                 </tr>
             </tbody>
         </table>
+        @can('manage-transaction', $transaction)
         <div class="pt-2">
-            <!-- Button Edit -->
-            <!-- Button Delete -->
+            <a href="/transaction/{{ $transaction->id }}/edit" class="btn btn-primary">Edit</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Delete</button>
+
+            <div class="modal fade" id="modalDelete" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure to delete this transaction?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <form action="/transaction/{{ $transaction->id }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        @endcan
     </div>
 </div>
 

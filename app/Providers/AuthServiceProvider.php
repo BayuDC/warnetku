@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Operator;
+use App\Models\Transaction;
 
 class AuthServiceProvider extends ServiceProvider {
     /**
@@ -26,6 +27,9 @@ class AuthServiceProvider extends ServiceProvider {
 
         Gate::define('manage-operator', function (Operator $operator) {
             return $operator->role_id == 1;
+        });
+        Gate::define('manage-transaction', function (Operator $operator, Transaction $transaction) {
+            return $operator->id == $transaction->operator_id;
         });
     }
 }
