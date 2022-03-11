@@ -38,8 +38,19 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/logout">Logout</a>
+                    <li class="nav-item dropdown">
+                        <div class="text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::user()->username }}
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <h6 class="dropdown-header">Login as <span class="fw-bold">{{ Auth::user()->fullname }}</span></h6>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item">
+                                <a href="/logout" class="link-danger">Logout</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
