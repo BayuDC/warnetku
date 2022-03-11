@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('customer');
             $table->timestamp('time_start')->nullable();
             $table->timestamp('time_end')->nullable();
-            $table->integer('bill');
+            $table->unsignedBigInteger('bill');
             $table->foreignId('computer_id')->nullable();
             $table->foreignId('operator_id')->nullable();
         });

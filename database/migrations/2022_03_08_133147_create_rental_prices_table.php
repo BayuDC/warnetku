@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up() {
         Schema::create('rental_prices', function (Blueprint $table) {
             $table->id();
-            $table->integer('price');
+            $table->unsignedInteger('price');
             $table->integer('duration');
             $table->foreignId('type_id');
         });
