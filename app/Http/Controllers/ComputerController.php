@@ -43,7 +43,7 @@ class ComputerController extends Controller {
     public function store(Request $request) {
         $request->validate([
             'name' => 'required|regex:/^[0-9a-zA-Z\s\-]+$/',
-            'type' => 'required'
+            'type' => 'required|exists:App\Models\ComputerType,id'
         ]);
 
         $computer = new Computer;
@@ -58,7 +58,7 @@ class ComputerController extends Controller {
     public function update(Computer $computer, Request $request) {
         $request->validate([
             'name' => 'required|regex:/^[0-9a-zA-Z\s\-]+$/',
-            'type' => 'required'
+            'type' => 'required|exists:App\Models\ComputerType,id'
         ]);
 
         $computer->name = $request->name;

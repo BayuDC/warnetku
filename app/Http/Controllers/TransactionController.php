@@ -50,7 +50,7 @@ class TransactionController extends Controller {
     public function store(Request $request) {
         $request->validate([
             'customer' => 'required|regex:/^[a-zA-Z\s0-9]+$/',
-            'computer' => 'required',
+            'computer' => 'required|exists:App\Models\Computer,id',
             'duration' => 'required|integer'
         ]);
 
@@ -72,7 +72,7 @@ class TransactionController extends Controller {
 
         $request->validate([
             'customer' => 'required|regex:/^[a-zA-Z\s0-9]+$/',
-            'computer' => 'required',
+            'computer' => 'required|exists:App\Models\Computer,id',
         ]);
 
         $transaction->customer = $request->customer;

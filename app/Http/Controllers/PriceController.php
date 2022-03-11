@@ -34,7 +34,7 @@ class PriceController extends Controller {
         $request->validate([
             'price' => 'required|integer',
             'duration' => 'required|integer',
-            'type' => 'required'
+            'type' => 'required|exists:App\Models\ComputerType,id'
         ]);
 
         $rental = new RentalPrice();
@@ -51,7 +51,7 @@ class PriceController extends Controller {
         $request->validate([
             'price' => 'required|integer',
             'duration' => 'required|integer',
-            'type' => 'required'
+            'type' => 'required|exists:App\Models\ComputerType,id'
         ]);
 
         $rental->price = $request->price;
