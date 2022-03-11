@@ -84,6 +84,7 @@ class TransactionController extends Controller {
     }
     public function extend(Transaction $transaction, Request $request) {
         if (Gate::denies('manage-transaction', $transaction)) abort(403);
+        if ($transaction->status != "Ongoing") abort(404);
 
         $request->validate([
             'duration' => 'required|integer|min:1|max:24'

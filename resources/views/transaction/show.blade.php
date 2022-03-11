@@ -18,6 +18,7 @@
                     <th scope="row" class="">Duration</th>
                     <td>
                         {{ $transaction->duration }} Hour{{ $transaction->duration > 1 ? 's' : '' }}
+                        @if($transaction->status == 'Ongoing')
                         @can('manage-transaction', $transaction)
                         <button class="btn badge btn-success ms-2" type="button" data-bs-toggle="modal" data-bs-target="#modalAdd">Add</button>
                         <div class="modal fade" id="modalAdd" tabindex="-1">
@@ -41,6 +42,7 @@
                             </div>
                         </div>
                         @endcan
+                        @endif
                     </td>
                 </tr>
                 <tr>
