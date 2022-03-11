@@ -98,4 +98,9 @@ class TransactionController extends Controller {
 
         return $bill;
     }
+    public function destroy(Transaction $transaction) {
+        $transaction->delete();
+
+        return redirect('/transaction');
+    }
 }
