@@ -6,6 +6,7 @@ use App\Http\Controllers\ComputerController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/transaction/{transaction:id}', [TransactionController::class, 'update']);
     Route::put('/transaction/{transaction:id}/extend', [TransactionController::class, 'extend']);
     Route::delete('/transaction/{transaction:id}', [TransactionController::class, 'destroy']);
+
+    Route::get('/report', [ReportController::class, 'index']);
 
     Route::get('/logout', [AuthController::class, 'logout']);
 });

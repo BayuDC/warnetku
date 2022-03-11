@@ -33,6 +33,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="/transaction">Transaction</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/report">Daily Report</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
