@@ -44,7 +44,7 @@ class TransactionController extends Controller {
                     $query->whereRaw("'{$now}' BETWEEN time_start AND time_end");
                 },
             ])->with('type')->get(),
-            'transaction' => $transaction
+            'transaction' => $transaction->load('computer')
         ]);
     }
     public function store(Request $request) {
@@ -68,11 +68,19 @@ class TransactionController extends Controller {
         return redirect('/transaction');
     }
     public function update(Transaction $transaction, Request $request) {
+        if (Gate::denies('manage-transaction', $transaction)) abort(403);
+
         $request->validate([
             'customer' => 'required|regex:/^[a-zA-Z\s0-9]+$/',
             'computer' => 'required',
-            'duration' => 'required|integer'
         ]);
+
+        $transaction->customer = $request->customer;
+        $transaction->computer_id = $request->computer;
+
+        $transaction->save();
+
+        return redirect('/transaction');
     }
     private function calcBill(int $duration, $computer) {
         $typeId = Computer::find($computer)->type_id;
