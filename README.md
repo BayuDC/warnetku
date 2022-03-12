@@ -36,3 +36,40 @@ You can use the account below for login access
     can only update and delete their own transaction.
 -   ### Daily Report
     just like it name, operators can see daily reports here.
+
+## 🧪 Database Structure
+
+![Database](https://cdn.discordapp.com/attachments/946013429200723989/951855735157960754/drawSQL-export-2022-03-11_21_53.png)
+
+## 🛠️ Development
+
+```
+# Clone the project
+$ git clone https://github.com/BayuDC/warnetku.git
+$ cd warnetku
+
+# Install dependencies
+$ composer install
+
+# Create env file
+$ cp .env.example .env
+
+# Set all required variables
+$ nano .env
+# or using your favorite text editor
+
+# Generate encryption key
+$ php artisan key:generate
+
+# Database migration
+$ php aritsan migrate
+# with seed
+$ php artisan migrate --seed
+
+$ Run dev server
+$ php artisan serve
+```
+
+## 📝 Todo
+
+-   Refactor, there are so many inefficient and repetitive code
