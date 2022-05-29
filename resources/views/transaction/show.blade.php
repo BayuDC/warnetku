@@ -17,7 +17,7 @@
                 <tr>
                     <th scope="row" class="">Duration</th>
                     <td>
-                        {{ $transaction->duration }} Hour{{ $transaction->duration > 1 ? 's' : '' }}
+                        {{ $transaction->duration }}
                         @if($transaction->status == 'Ongoing')
                         @can('manage-transaction', $transaction)
                         <button class="btn badge btn-success ms-2" type="button" data-bs-toggle="modal" data-bs-target="#modalAdd">Add</button>
@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                     <th scope="row" class="">Remaining time</th>
-                    <td>{{ $diff = $transaction['remaining_time'] }} Minute{{ $diff > 1 ? 's' : '' }}</td>
+                    <td>{{ $transaction['remaining_time'] }}</td>
                 </tr>
                 <tr>
                     <th>Total Bill</th>

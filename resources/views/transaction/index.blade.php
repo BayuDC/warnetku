@@ -25,8 +25,8 @@
                     <th class="col-1">{{ $i + 1 }}</th>
                     <td>{{ $transaction->customer }}</td>
                     <td>{{ $transaction->computer->name }}</td>
-                    <td>{{ $transaction->duration }} Hour{{ $transaction->duration > 1 ? 's' : '' }}</td>
-                    <td>{{ $diff = $transaction['remaining_time'] }} Minute{{ $diff > 1 ? 's' : '' }}</td>
+                    <td>{{ $transaction->duration  }}</td>
+                    <td>{{ $transaction['remaining_time'] }}</td>
                     <td class="col-1">
                         <a href="/transaction/{{ $transaction->id }}" class="btn btn-sm btn-primary">Detail</a>
                     </td>

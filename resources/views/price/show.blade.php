@@ -19,7 +19,7 @@
                 </tr>
                 <tr>
                     <th scope="row" class="col-2">Duration</th>
-                    <td>{{ $rental->duration }} Hour{{ $rental->duration > 1 ? 's' : '' }}</td>
+                    <td>{{ $rental->duration }}</td>
                 </tr>
                 <tr>
                     <th scope="row" class="col-2">Type</th>

@@ -19,7 +19,7 @@
                     {{ $rental->type->name }}
                 </div>
                 <div class="fw-bold">
-                    {{ $rental->duration }} Hour{{ $rental->duration > 1 ? 's' : '' }}
+                    {{ $rental->duration }}
                 </div>
             </div>
         </a>
@@ -37,7 +37,7 @@
                     {{ $rental->type->name }}
                 </div>
                 <div class="fw-bold">
-                    {{ $rental->duration }} Hour{{ $rental->duration > 1 ? 's' : '' }}
+                    {{ $rental->duration }}
                 </div>
             </div>
         </a>

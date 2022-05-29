@@ -18,4 +18,8 @@ class RentalPrice extends Model {
     public function type() {
         return $this->belongsTo(ComputerType::class);
     }
+
+    public function getDurationAttribute() {
+        return $this->attributes['duration'] . ' Hour' . ($this->attributes['duration'] > 1 ? 's' : '');
+    }
 }

@@ -45,10 +45,12 @@ class Transaction extends Model {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['time_end'])->setTimezone('Asia/Jakarta');
     }
     public function getRemainingTimeAttribute() {
-        if ($this->status == 'Done')
-            return 0;
+        $diff = $this->status == 'Done' ? 0 : Carbon::now()->diffInMinutes($this->time_end);
 
-        return Carbon::now()->diffInMinutes($this->time_end);
+        return $diff . ' Minute' . ($diff > 1 ? 's' : '');
+    }
+    public function getDurationAttribute() {
+        return $this->attributes['duration'] . ' Hour' . ($this->attributes['duration'] > 1 ? 's' : '');
     }
 
     public static function getOngoing() {
