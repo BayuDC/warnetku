@@ -11,10 +11,8 @@ class RentalPrice extends Model {
 
     public $timestamps = false;
 
-    protected $fillable = [
-        'price',
-        'duration',
-        'type_id'
+    protected $guarded = [
+        'id'
     ];
 
     public function type() {

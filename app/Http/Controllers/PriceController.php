@@ -8,6 +8,7 @@ use App\Models\ComputerType;
 
 class PriceController extends Controller {
     private $validationRules = [
+        'name' => 'required|regex:/^[0-9a-zA-Z\s\-]+$/',
         'price' => 'required|integer|gt:0',
         'duration' => 'required|integer|gt:0',
         'type' => 'required|exists:App\Models\ComputerType,id'
@@ -37,10 +38,11 @@ class PriceController extends Controller {
     }
 
     public function store(Request $request) {
-        try {
-            $validated = $request->validate($this->validationRules);
+        $validated = $request->validate($this->validationRules);
 
+        try {
             $rental = RentalPrice::query()->create([
+                'name' => $validated['name'],
                 'price' => $validated['price'],
                 'duration' => $validated['duration'],
                 'type_id' => $validated['type']
@@ -52,13 +54,14 @@ class PriceController extends Controller {
         }
     }
     public function update(RentalPrice $rental, Request $request) {
-        try {
-            $request->validate($this->validationRules);
+        $validated =  $request->validate($this->validationRules);
 
+        try {
             $rental->updateOrFail([
-                'price' => $request->price,
-                'duration' => $request->duration,
-                'type_id' => $request->type
+                'name' => $validated['name'],
+                'price' => $validated['price'],
+                'duration' => $validated['duration'],
+                'type_id' => $validated['type']
             ]);
 
             return redirect('/price/' . $rental->id)->with('success', 'Successfully updated rentar price');

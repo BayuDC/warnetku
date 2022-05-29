@@ -8,6 +8,13 @@
         <form action="/price" method="post">
             @csrf
             <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" value="{{ old('name') }}" name="name" id="name" class="form-control @error('name') is-invalid @enderror" required>
+                @error('name')
+                <small class="text-danger text-end d-block mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
                 <input type="number" value="{{ old('price') }}" name="price" id="price" min="1000" step="500" class="form-control @error('price') is-invalid @enderror" required>
                 @error('price')
@@ -22,7 +29,7 @@
                 @enderror
             </div>
             <div class="mb-4">
-                <label for="type" class="form-label">Type</label>
+                <label for="type" class="form-label">Computer Type</label>
                 <select name="type" id="type" class="form-select @error('type') is-invalid @enderror">
                     <option selected></option>
                     @foreach($types as $type)

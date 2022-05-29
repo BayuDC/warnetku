@@ -10,6 +10,10 @@
         <table class="table">
             <tbody>
                 <tr>
+                    <th scope="row" class="col-2">Name</th>
+                    <td>{{ $rental->name }}</td>
+                </tr>
+                <tr>
                     <th scope="row" class="col-2">Price</th>
                     <td>Rp. {{ $rental->price }}</td>
                 </tr>
