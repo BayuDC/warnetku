@@ -15,7 +15,7 @@ class OperatorController extends Controller {
 
     public function index() {
         return view('operator.index', [
-            'operators' => Operator::with('role')->get()
+            'operators' => Operator::with('role')->paginate(10)
         ]);
     }
     public function show(Operator $operator) {

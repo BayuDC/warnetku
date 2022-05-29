@@ -25,7 +25,7 @@
             <tbody>
                 @foreach($operators as $i => $operator)
                 <tr>
-                    <th scope="row" class="col-1">{{ $i + 1 }}</th>
+                    <th scope="row" class="col-1">{{ ($operators->currentPage() - 1) * $operators->count() + $i + 1 }}</th>
                     <td>{{ $operator->fullname }}</td>
                     <td>{{ $operator->username }}</td>
                     <td>{{ $operator->role->name }}</td>
@@ -39,6 +39,7 @@
             </tbody>
         </table>
     </div>
+    {{ $operators->links() }}
 </div>
 
 @endsection
