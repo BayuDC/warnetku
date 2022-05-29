@@ -11,22 +11,12 @@ class ComputerController extends Controller {
 
     public function index() {
         return view('computer.index', [
-            'computers' => Computer::with([
-                'transactions' => function ($query) {
-                    $now = Carbon::now()->toDateTimeString();
-                    $query->whereRaw("'{$now}' BETWEEN time_start AND time_end");
-                },
-            ])->with('type')->get()
+            'computers' => Computer::customAll()
         ]);
     }
     public function show(Computer $computer) {
         return view('computer.show', [
-            'computer' => $computer->load([
-                'transactions' => function ($query) {
-                    $now = Carbon::now()->toDateTimeString();
-                    $query->whereRaw("'{$now}' BETWEEN time_start AND time_end");
-                },
-            ])->load('type')
+            'computer' => $computer->customLoad()
         ]);
     }
     public function create() {

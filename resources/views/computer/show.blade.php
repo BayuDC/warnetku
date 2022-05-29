@@ -1,11 +1,15 @@
 @extends('layouts.main')
 @section('content')
 
-<h1 class="pb-3">Detail Computer - {{ $computer->name }}</h1>
+<h1 class="pb-3">Detail Computer</h1>
 <div class="row">
     <div class="col-lg-4 col-md-8">
         <table class="table">
             <tbody>
+                <tr>
+                    <th scope="row" class="col-2">Name</th>
+                    <td>{{ $computer->name }}</td>
+                </tr>
                 <tr>
                     <th scope="row" class="col-2">Type</th>
                     <td>{{ $computer->type->name }}</td>
