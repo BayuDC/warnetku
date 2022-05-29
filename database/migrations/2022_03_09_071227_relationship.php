@@ -32,17 +32,17 @@ return new class extends Migration {
      */
     public function down() {
         Schema::table('operators', function (Blueprint $table) {
-            $table->dropForeign('role_id');
+            $table->dropForeign(['role_id']);
         });
         Schema::table('computers', function (Blueprint $table) {
-            $table->dropForeign('type_id');
+            $table->dropForeign(['type_id']);
         });
         Schema::table('rental_prices', function (Blueprint $table) {
-            $table->dropForeign('type_id');
+            $table->dropForeign(['type_id']);
         });
         Schema::table('transactions', function (Blueprint $table) {
-            $table->dropForeign('computer_id');
-            $table->dropForeign('operator_id');
+            $table->dropForeign(['computer_id']);
+            $table->dropForeign(['operator_id']);
         });
     }
 };
