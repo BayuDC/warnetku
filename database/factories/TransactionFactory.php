@@ -16,13 +16,13 @@ class TransactionFactory extends Factory {
      * @return array<string, mixed>
      */
     public function definition() {
-        $time =  Carbon::parse($this->faker->dateTimeThisMonth('yesterday'));
+        $time = $this->faker->dateTimeThisMonth('yesterday');
         $computerId = $this->faker->numberBetween(1, 20);
 
         return [
             'customer' => $this->faker->name,
-            'time_start' => $time,
-            'time_end' => $time->addHour(),
+            'time_start' => Carbon::parse($time),
+            'time_end' => Carbon::parse($time)->modify('+1 hour'),
             'bill' => $computerId < 8 ? 5000 : 3000,
             'computer_id' => $computerId,
             'operator_id' => $this->faker->numberBetween(1, 10),
