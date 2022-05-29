@@ -8,63 +8,41 @@
 
 @include('components.notif')
 
-<div class="row">
-    <h3>Gaming</h3>
-    <div class="table-responsive">
-        <table class="table table-hover align-middle">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Duration</th>
-                    <th scope="col">Detail</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($gaming_prices as $i => $rental)
-                <tr>
-                    <th scope="row" class="col-1">{{ $i + 1 }}</th>
-                    <td>Rp. {{ $rental->price }}</td>
-                    <td>{{ $rental->duration }} Hour{{ $rental->duration > 1 ? 's' : '' }}</td>
-                    <td class="col-1">
-                        <a href="/price/{{ $rental->id }}" class="btn btn-sm btn-primary">
-                            Detail
-                        </a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+<div class="row g-3">
+    @foreach($gaming_prices as $rental)
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+        <a href="/price/{{ $rental->id }}" class="p-4 bg-light border d-block text-dark text-decoration-none">
+            <h4>{{ $rental->name }}</h4>
+            <h5 class="fw-normal">Rp. {{ $rental->price }}</h5>
+            <div class="text-muted d-flex justify-content-between pt-3">
+                <div>
+                    {{ $rental->type->name }}
+                </div>
+                <div class="fw-bold">
+                    {{ $rental->duration }} Hour{{ $rental->duration > 1 ? 's' : '' }}
+                </div>
+            </div>
+        </a>
     </div>
+    @endforeach
 </div>
-<div class="row">
-    <h3>Office</h3>
-    <div class="table-responsive">
-        <table class="table table-hover align-middle">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Duration</th>
-                    <th scope="col">Detail</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($office_prices as $i => $rental)
-                <tr>
-                    <th scope="row" class="col-1">{{ $i + 1 }}</th>
-                    <td>Rp. {{ $rental->price }}</td>
-                    <td>{{ $rental->duration }} Hours</td>
-                    <td class="col-1">
-                        <a href="/price/{{ $rental->id }}" class="btn btn-sm btn-primary">
-                            Detail
-                        </a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+<div class="row g-3 mt-1">
+    @foreach($office_prices as $rental)
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+        <a href="/price/{{ $rental->id }}" class="p-4 bg-light border d-block text-dark text-decoration-none">
+            <h4>{{ $rental->name }}</h4>
+            <h5 class="fw-normal">Rp. {{ $rental->price }}</h5>
+            <div class="text-muted d-flex justify-content-between pt-3">
+                <div>
+                    {{ $rental->type->name }}
+                </div>
+                <div class="fw-bold">
+                    {{ $rental->duration }} Hour{{ $rental->duration > 1 ? 's' : '' }}
+                </div>
+            </div>
+        </a>
     </div>
+    @endforeach
 </div>
 
 @endsection

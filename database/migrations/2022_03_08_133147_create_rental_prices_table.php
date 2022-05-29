@@ -13,6 +13,7 @@ return new class extends Migration {
     public function up() {
         Schema::create('rental_prices', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->unsignedBigInteger('price');
             $table->unsignedInteger('duration');
             $table->foreignId('type_id');

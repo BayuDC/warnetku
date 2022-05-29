@@ -41,26 +41,31 @@ class DatabaseSeeder extends Seeder {
         })->create();
 
         RentalPrice::factory()->create([
+            'name' => 'Packet Gaming 1',
             'price' => 5000,
             'duration' => 1,
             'type_id' => 1
         ]);
         RentalPrice::factory()->create([
+            'name' => 'Packet Gaming 2',
             'price' => 9000,
             'duration' => 2,
             'type_id' => 1
         ]);
         RentalPrice::factory()->create([
+            'name' => 'Packet Gaming 3',
             'price' => 13000,
             'duration' => 3,
             'type_id' => 1
         ]);
         RentalPrice::factory()->create([
+            'name' => 'Packet Office 1',
             'price' => 3000,
             'duration' => 1,
             'type_id' => 2
         ]);
         RentalPrice::factory()->create([
+            'name' => 'Packet Office 2',
             'price' => 5000,
             'duration' => 2,
             'type_id' => 2
