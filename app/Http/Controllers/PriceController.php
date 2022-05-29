@@ -7,6 +7,11 @@ use App\Models\RentalPrice;
 use App\Models\ComputerType;
 
 class PriceController extends Controller {
+    private $validationRules = [
+        'price' => 'required|integer|gt:0',
+        'duration' => 'required|integer|gt:0',
+        'type' => 'required|exists:App\Models\ComputerType,id'
+    ];
 
     public function index() {
         return view('price.index', [
@@ -30,41 +35,44 @@ class PriceController extends Controller {
             'types' => ComputerType::all()
         ]);
     }
+
     public function store(Request $request) {
-        $request->validate([
-            'price' => 'required|integer',
-            'duration' => 'required|integer',
-            'type' => 'required|exists:App\Models\ComputerType,id'
-        ]);
+        try {
+            $validated = $request->validate($this->validationRules);
 
-        $rental = new RentalPrice();
+            $rental = RentalPrice::query()->create([
+                'price' => $validated['price'],
+                'duration' => $validated['duration'],
+                'type_id' => $validated['type']
+            ]);
 
-        $rental->price = $request->price;
-        $rental->duration = $request->duration;
-        $rental->type_id = $request->type;
-
-        $rental->save();
-
-        return redirect('/price');
+            return redirect('/price/' . $rental->id)->with('success', 'Successfully created rentar price');
+        } catch (\Exception $e) {
+            return redirect('/price')->with('error', 'Failed to create rentar price');
+        }
     }
     public function update(RentalPrice $rental, Request $request) {
-        $request->validate([
-            'price' => 'required|integer',
-            'duration' => 'required|integer',
-            'type' => 'required|exists:App\Models\ComputerType,id'
-        ]);
+        try {
+            $request->validate($this->validationRules);
 
-        $rental->price = $request->price;
-        $rental->duration = $request->duration;
-        $rental->type_id = $request->type;
+            $rental->updateOrFail([
+                'price' => $request->price,
+                'duration' => $request->duration,
+                'type_id' => $request->type
+            ]);
 
-        $rental->save();
-
-        return redirect('/price');
+            return redirect('/price/' . $rental->id)->with('success', 'Successfully updated rentar price');
+        } catch (\Exception $e) {
+            return redirect('/price/' . $rental->id)->with('error', 'Failed to update rentar price');
+        }
     }
     public function destroy(RentalPrice $rental) {
-        $rental->delete();
+        try {
+            $rental->deleteOrFail();
 
-        return redirect('/price');
+            return redirect('/price')->with('success', 'Successfully deleted rentar price');
+        } catch (\Exception $e) {
+            return redirect('/price')->with('error', 'Failed to delete rentar price');
+        }
     }
 }

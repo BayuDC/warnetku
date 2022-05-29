@@ -9,7 +9,7 @@
             @csrf
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
-                <input type="number" value="{{ old('price') }}" name="price" id="price" min="1000" step="1000" class="form-control @error('price') is-invalid @enderror" required>
+                <input type="number" value="{{ old('price') }}" name="price" id="price" min="1000" step="500" class="form-control @error('price') is-invalid @enderror" required>
                 @error('price')
                 <small class="text-danger text-end d-block mt-2">{{ $message }}</small>
                 @enderror

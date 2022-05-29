@@ -6,6 +6,8 @@
     <a href="/price/create" class="btn btn-outline-success ms-auto btn-lg">Add Rental Price</a>
 </div>
 
+@include('components.notif')
+
 <div class="row">
     <h3>Gaming</h3>
     <div class="table-responsive">

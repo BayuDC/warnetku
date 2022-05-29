@@ -2,6 +2,9 @@
 @section('content')
 
 <h1 class="pb-3">Detail Rental Price</h1>
+
+@include('components.notif')
+
 <div class="row">
     <div class="col-lg-4 col-md-8">
         <table class="table">

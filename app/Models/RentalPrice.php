@@ -11,6 +11,12 @@ class RentalPrice extends Model {
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'price',
+        'duration',
+        'type_id'
+    ];
+
     public function type() {
         return $this->belongsTo(ComputerType::class);
     }
