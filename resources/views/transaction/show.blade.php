@@ -54,6 +54,10 @@
                     <td>{{ $transaction['time_end'] }}</td>
                 </tr>
                 <tr>
+                    <th scope="row" class="">Remaining time</th>
+                    <td>{{ $diff = $transaction['remaining_time'] }} Minute{{ $diff > 1 ? 's' : '' }}</td>
+                </tr>
+                <tr>
                     <th>Total Bill</th>
                     <td>Rp. {{ $transaction->bill }}</td>
                 </tr>

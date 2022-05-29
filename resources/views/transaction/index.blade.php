@@ -15,7 +15,7 @@
                     <th>Customer</th>
                     <th>Computer</th>
                     <th>Duration</th>
-                    <th>Time Left</th>
+                    <th>Remaining time</th>
                     <th>Detail</th>
                 </tr>
             </thead>
@@ -26,7 +26,7 @@
                     <td>{{ $transaction->customer }}</td>
                     <td>{{ $transaction->computer->name }}</td>
                     <td>{{ $transaction->duration }} Hour{{ $transaction->duration > 1 ? 's' : '' }}</td>
-                    <td>Coming soon</td>
+                    <td>{{ $diff = $transaction['remaining_time'] }} Minute{{ $diff > 1 ? 's' : '' }}</td>
                     <td class="col-1">
                         <a href="/transaction/{{ $transaction->id }}" class="btn btn-sm btn-primary">Detail</a>
                     </td>

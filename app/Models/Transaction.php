@@ -19,6 +19,10 @@ class Transaction extends Model {
         'computer'
     ];
 
+    protected $appends = [
+        'remaining_time'
+    ];
+
     protected static function booted() {
         static::addGlobalScope('time', function (Builder $builder) {
             $builder->select($builder->getQuery()->from . '.*');
@@ -32,6 +36,19 @@ class Transaction extends Model {
     }
     public function computer() {
         return $this->belongsTo(Computer::class);
+    }
+
+    public function getTimeStartAttribute() {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['time_start'])->setTimezone('Asia/Jakarta');
+    }
+    public function getTimeEndAttribute() {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['time_end'])->setTimezone('Asia/Jakarta');
+    }
+    public function getRemainingTimeAttribute() {
+        if ($this->status == 'Done')
+            return 0;
+
+        return Carbon::now()->diffInMinutes($this->time_end);
     }
 
     public static function getOngoing() {
