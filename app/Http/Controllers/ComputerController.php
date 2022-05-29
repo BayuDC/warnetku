@@ -35,9 +35,9 @@ class ComputerController extends Controller {
         ]);
     }
     public function store(Request $request) {
-        try {
-            $validated = $request->validate($this->validationRules);
+        $validated = $request->validate($this->validationRules);
 
+        try {
             $computer = Computer::query()->create([
                 'name' => $validated['name'],
                 'type_id' => $validated['type']
@@ -49,9 +49,9 @@ class ComputerController extends Controller {
         }
     }
     public function update(Computer $computer, Request $request) {
-        try {
-            $validated = $request->validate($this->validationRules);
+        $validated = $request->validate($this->validationRules);
 
+        try {
             $computer->updateOrFail([
                 'name' => $validated['name'],
                 'type_id' => $validated['type']

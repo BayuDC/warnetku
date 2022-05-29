@@ -38,9 +38,9 @@ class OperatorController extends Controller {
     public function store(Request $request) {
         if (Gate::denies('manage-operator')) abort(403);
 
-        try {
-            $validated = $request->validate($this->validationRules);
+        $validated = $request->validate($this->validationRules);
 
+        try {
             $operator = Operator::query()->create([
                 'fullname' => $validated['fullname'],
                 'username' => $validated['username'],
@@ -56,9 +56,9 @@ class OperatorController extends Controller {
     public function update(Operator $operator, Request $request) {
         if (Gate::denies('manage-operator')) abort(403);
 
-        try {
-            $validated =  $request->validate($this->validationRules);
+        $validated =  $request->validate($this->validationRules);
 
+        try {
             $operator->updateOrFail([
                 'fullname' => $validated['fullname'],
                 'username' => $validated['username'],
