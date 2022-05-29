@@ -6,6 +6,8 @@
     <a href="/transaction/create" class="btn btn-lg btn-outline-success">Add Transaction</a>
 </div>
 
+@include('components.notif')
+
 <div class="row">
     <div class="table-responsive">
         <table class="table table-hover align-middle">

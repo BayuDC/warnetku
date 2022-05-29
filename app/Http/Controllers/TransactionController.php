@@ -11,6 +11,11 @@ use App\Models\RentalPrice;
 use Carbon\Carbon;
 
 class TransactionController extends Controller {
+    private $validationRules = [
+        'customer' => 'required|regex:/^[a-zA-Z\s0-9]+$/',
+        'computer' => 'required|exists:App\Models\Computer,id',
+    ];
+
     public function index() {
         return view('transaction.index', [
             'transactions' => Transaction::getOngoing()
@@ -23,98 +28,95 @@ class TransactionController extends Controller {
     }
     public function create() {
         return view('transaction.create', [
-            'computers' => Computer::with([
-                'transactions' => function ($query) {
-                    $now = Carbon::now()->toDateTimeString();
-                    $query->whereRaw("'{$now}' BETWEEN time_start AND time_end");
-                },
-            ])->with('type')->get()
+            'computers' => Computer::customAll()
         ]);
     }
     public function edit(Transaction $transaction) {
         if (Gate::denies('manage-transaction', $transaction)) abort(403);
 
         return view('transaction.edit', [
-            'computers' => Computer::with([
-                'transactions' => function ($query) {
-                    $now = Carbon::now()->toDateTimeString();
-                    $query->whereRaw("'{$now}' BETWEEN time_start AND time_end");
-                },
-            ])->with('type')->get(),
-            'transaction' => $transaction->load('computer')
+            'computers' => Computer::customAll(),
+            'transaction' => $transaction
         ]);
     }
     public function store(Request $request) {
-        $request->validate([
-            'customer' => 'required|regex:/^[a-zA-Z\s0-9]+$/',
-            'computer' => 'required|exists:App\Models\Computer,id',
-            'duration' => 'required|integer'
-        ]);
+        $this->validationRules['duration'] = 'required|integer|min:1|max:24';
+        $validated = $request->validate($this->validationRules);
 
-        $transaction = new Transaction;
+        try {
+            $transaction = Transaction::query()->create([
+                'customer' => $validated['customer'],
+                'time_start' => Carbon::now(),
+                'time_end' => Carbon::now()->addHour($validated['duration']),
+                'bill' => $this->calculateBill($validated['computer'], (int)$validated['duration']),
+                'computer_id' => $validated['computer'],
+                'operator_id' => Auth::id()
+            ]);
 
-        $transaction->customer = $request->customer;
-        $transaction->time_start = Carbon::now();
-        $transaction->time_end = Carbon::now()->addHour($request->duration);
-        $transaction->bill = $this->calcBill((int)$request->duration, $request->computer);
-        $transaction->computer_id = $request->computer;
-        $transaction->operator_id = Auth::user()->id;
-
-        $transaction->save();
-
-        return redirect('/transaction');
+            return redirect('/transaction')->with('success', 'Transaction created successfully');
+        } catch (\Exception $e) {
+            return redirect('/transaction')->with('error', 'Failed to create transaction');
+        }
     }
     public function update(Transaction $transaction, Request $request) {
         if (Gate::denies('manage-transaction', $transaction)) abort(403);
 
-        $request->validate([
-            'customer' => 'required|regex:/^[a-zA-Z\s0-9]+$/',
-            'computer' => 'required|exists:App\Models\Computer,id',
-        ]);
+        $validated = $request->validate($this->validationRules);
 
-        $transaction->customer = $request->customer;
-        $transaction->computer_id = $request->computer;
+        try {
+            $transaction->updateOrFail([
+                'customer' => $validated['customer'],
+                'computer_id' => $validated['computer'],
+            ]);
 
-        $transaction->save();
-
-        return redirect('/transaction');
+            return redirect('/transaction/' . $transaction->id)->with('success', 'Transaction updated successfully');
+        } catch (\Exception $e) {
+            return redirect('/transaction/' . $transaction->id)->with('error', 'Failed to update transaction');
+        }
     }
     public function extend(Transaction $transaction, Request $request) {
         if (Gate::denies('manage-transaction', $transaction)) abort(403);
         if ($transaction->status != "Ongoing") abort(404);
 
-        $request->validate([
-            'duration' => 'required|integer|min:1|max:24'
-        ]);
+        $validated = $request->validate(['duration' => 'required|integer|min:1|max:24']);
 
-        $duration = $transaction->duration + $request->duration;
+        try {
+            $transaction->updateOrFail([
+                'time_end' => Carbon::create($transaction->time_end_raw)->add($validated['duration'], 'hour'),
+                'bill' => $this->calculateBill($transaction->computer_id, $transaction->duration_int + $validated['duration'])
+            ]);
 
-        $transaction->time_end = Carbon::create($transaction->time_end)->add($request->duration, 'hour');
-        $transaction->bill = $this->calcBill($duration, $transaction->computer_id);
-
-        $transaction->save();
-
-        return redirect('/transaction/' . $transaction->id);
+            return redirect('/transaction/' . $transaction->id)->with('success', 'Successfully extended duration');
+        } catch (\Exception $e) {
+            return redirect('/transaction/' . $transaction->id)->with('error', 'Failed to extend duration');
+        }
     }
-    private function calcBill(int $duration, $computer) {
+    public function destroy(Transaction $transaction) {
+        if (!Gate::allows('manage-transaction', $transaction)) abort(403);
+
+        try {
+            $transaction->deleteOrFail();
+
+            return redirect('/transaction')->with('success', 'Transaction deleted successfully');
+        } catch (\Exception $e) {
+            return redirect('/transaction')->with('error', 'Failed to delete transaction');
+        }
+    }
+
+    private function calculateBill($computer, int $duration) {
         $typeId = Computer::find($computer)->type_id;
         $prices = RentalPrice::where('type_id', $typeId)->orderBy('duration', 'desc')->get();
 
         $bill = 0;
 
         foreach ($prices as $price) {
-            $count = (int)($duration / $price->duration);
-            $duration -= $count * $price->duration;
+            $count = (int)($duration / $price->duration_int);
+            $duration -= $count * $price->duration_int;
             $bill += $price->price * $count;
 
             if ($duration == 0) break;
         }
 
         return $bill;
-    }
-    public function destroy(Transaction $transaction) {
-        $transaction->delete();
-
-        return redirect('/transaction');
     }
 }

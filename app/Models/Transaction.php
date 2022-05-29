@@ -15,6 +15,10 @@ class Transaction extends Model {
 
     public $timestamps = false;
 
+    protected $guarded = [
+        'id'
+    ];
+
     protected $with = [
         'computer'
     ];
@@ -44,6 +48,9 @@ class Transaction extends Model {
     public function getTimeEndAttribute() {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['time_end'])->setTimezone('Asia/Jakarta');
     }
+    public function getTimeEndRawAttribute() {
+        return $this->attributes['time_end'];
+    }
     public function getRemainingTimeAttribute() {
         $diff = $this->status == 'Done' ? 0 : Carbon::now()->diffInMinutes($this->time_end);
 
@@ -51,6 +58,9 @@ class Transaction extends Model {
     }
     public function getDurationAttribute() {
         return $this->attributes['duration'] . ' Hour' . ($this->attributes['duration'] > 1 ? 's' : '');
+    }
+    public function getDurationIntAttribute() {
+        return $this->attributes['duration'];
     }
 
     public static function getOngoing() {

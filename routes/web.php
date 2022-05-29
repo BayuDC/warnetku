@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/transaction/{transaction:id}', [TransactionController::class, 'show']);
     Route::get('/transaction/{transaction:id}/edit', [TransactionController::class, 'edit']);
     Route::put('/transaction/{transaction:id}', [TransactionController::class, 'update']);
-    Route::put('/transaction/{transaction:id}/extend', [TransactionController::class, 'extend']);
+    Route::patch('/transaction/{transaction:id}/extend', [TransactionController::class, 'extend']);
     Route::delete('/transaction/{transaction:id}', [TransactionController::class, 'destroy']);
 
     Route::get('/report', [ReportController::class, 'index']);

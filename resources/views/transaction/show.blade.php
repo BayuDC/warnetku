@@ -2,6 +2,10 @@
 @section('content')
 
 <h1 class="pb-3">Detail Transaction</h1>
+
+@include('components.notif')
+
+
 <div class="row">
     <div class="col-lg-4 col-md-8">
         <table class="table">
@@ -29,7 +33,7 @@
                                     </div>
                                     <form action="/transaction/{{ $transaction->id }}/extend" method="post">
                                         @csrf
-                                        @method('put')
+                                        @method('patch')
                                         <div class="modal-body">
                                             <input type="number" min="1" max="24" class="form-control" name="duration">
                                         </div>

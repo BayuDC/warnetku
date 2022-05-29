@@ -22,4 +22,7 @@ class RentalPrice extends Model {
     public function getDurationAttribute() {
         return $this->attributes['duration'] . ' Hour' . ($this->attributes['duration'] > 1 ? 's' : '');
     }
+    public function getDurationIntAttribute() {
+        return $this->attributes['duration'];
+    }
 }
