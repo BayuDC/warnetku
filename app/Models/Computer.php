@@ -13,6 +13,11 @@ class Computer extends Model {
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'name',
+        'type_id'
+    ];
+
     protected $with = [
         'type'
     ];

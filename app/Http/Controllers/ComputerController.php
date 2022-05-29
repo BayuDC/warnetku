@@ -8,6 +8,10 @@ use App\Models\Computer;
 use App\Models\ComputerType;
 
 class ComputerController extends Controller {
+    private $validationRules = [
+        'name' => 'required|regex:/^[0-9a-zA-Z\s\-]+$/',
+        'type' => 'required|exists:App\Models\ComputerType,id'
+    ];
 
     public function index() {
         return view('computer.index', [
@@ -31,35 +35,27 @@ class ComputerController extends Controller {
         ]);
     }
     public function store(Request $request) {
-        $request->validate([
-            'name' => 'required|regex:/^[0-9a-zA-Z\s\-]+$/',
-            'type' => 'required|exists:App\Models\ComputerType,id'
+        $validated = $request->validate($this->validationRules);
+
+        $computer = Computer::query()->create([
+            'name' => $validated['name'],
+            'type_id' => $validated['type']
         ]);
-
-        $computer = new Computer;
-
-        $computer->name = $request->name;
-        $computer->type_id = $request->type;
-
-        $computer->save();
 
         return redirect('/computer');
     }
     public function update(Computer $computer, Request $request) {
-        $request->validate([
-            'name' => 'required|regex:/^[0-9a-zA-Z\s\-]+$/',
-            'type' => 'required|exists:App\Models\ComputerType,id'
+        $validated = $request->validate($this->validationRules);
+
+        $computer->updateOrFail([
+            'name' => $validated['name'],
+            'type_id' => $validated['type']
         ]);
-
-        $computer->name = $request->name;
-        $computer->type_id = $request->type;
-
-        $computer->save();
 
         return redirect('/computer');
     }
     public function destroy(Computer $computer) {
-        $computer->delete();
+        $computer->deleteOrFail();
 
         return redirect('/computer');
     }
