@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 
-<h1 class="pb-3">Edit Computer - {{ $computer->name }}</h1>
+<h1 class="pb-3">Edit Computer</h1>
 
 <div class="row">
     <div class="col-lg-4 col-md-8">

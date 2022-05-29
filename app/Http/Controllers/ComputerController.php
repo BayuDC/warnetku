@@ -35,28 +35,40 @@ class ComputerController extends Controller {
         ]);
     }
     public function store(Request $request) {
-        $validated = $request->validate($this->validationRules);
+        try {
+            $validated = $request->validate($this->validationRules);
 
-        $computer = Computer::query()->create([
-            'name' => $validated['name'],
-            'type_id' => $validated['type']
-        ]);
+            $computer = Computer::query()->create([
+                'name' => $validated['name'],
+                'type_id' => $validated['type']
+            ]);
 
-        return redirect('/computer');
+            return redirect('/computer/' .  $computer->id)->with('success', 'Successfully created computer');
+        } catch (\Exception $e) {
+            return redirect('/computer')->with('error', 'Failed to create computer');
+        }
     }
     public function update(Computer $computer, Request $request) {
-        $validated = $request->validate($this->validationRules);
+        try {
+            $validated = $request->validate($this->validationRules);
 
-        $computer->updateOrFail([
-            'name' => $validated['name'],
-            'type_id' => $validated['type']
-        ]);
+            $computer->updateOrFail([
+                'name' => $validated['name'],
+                'type_id' => $validated['type']
+            ]);
 
-        return redirect('/computer');
+            return redirect('/computer/' . $computer->id)->with('success', 'Successfully updated computer');
+        } catch (\Exception $e) {
+            return redirect('/computer/' . $computer->id)->with('error', 'Failed to update computer');
+        }
     }
     public function destroy(Computer $computer) {
-        $computer->deleteOrFail();
+        try {
+            $computer->deleteOrFail();
 
-        return redirect('/computer');
+            return redirect('/computer')->with('success', 'Successfully deleted computer');
+        } catch (\Exception $e) {
+            return redirect('/computer')->with('error', 'Could not delete computer');
+        }
     }
 }

@@ -3,6 +3,8 @@
 
 <h1 class="pb-3">Manage Computers</h1>
 
+@include('components.notif')
+
 <div class="row g-3">
     @foreach($computers as $computer)
     <div class="col-lg-3 col-md-4 col-sm-6 col-12">
@@ -10,9 +12,9 @@
             <h3>{{ $computer->name }}</h3>
             <p class="">{{ $computer->type->name }}</p>
             <div class="text-muted"><i class="bi bi-dot"></i>
-                @if($computer->transactions->first())
+                @if($transaction = $computer->transactions->first())
                 <small class="me-1">🔵</small>
-                Used by {{ $computer->transactions->first()->customer }}
+                Used by {{ $transaction->customer }}
                 @else
                 <small class="me-1">🟡</small>
                 Idle
