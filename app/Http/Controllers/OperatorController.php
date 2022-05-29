@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Operator;
 
 class OperatorController extends Controller {
+    private $validationRules = [
+        'fullname' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'username' => 'required|unique:operators|regex:/^[a-zA-Z0-9\_]+$/',
+        'password' => 'required|confirmed|min:4'
+    ];
+
     public function index() {
         return view('operator.index', [
             'operators' => Operator::with('role')->get()
@@ -32,46 +38,48 @@ class OperatorController extends Controller {
     public function store(Request $request) {
         if (Gate::denies('manage-operator')) abort(403);
 
-        $request->validate([
-            'fullname' => 'required|regex:/^[a-zA-Z\s]+$/',
-            'username' => 'required|unique:operators|regex:/^[a-zA-Z0-9\_]+$/',
-            'password' => 'required|confirmed|min:4'
-        ]);
+        try {
+            $validated = $request->validate($this->validationRules);
 
-        $operator = new Operator;
+            $operator = Operator::query()->create([
+                'fullname' => $validated['fullname'],
+                'username' => $validated['username'],
+                'password' => bcrypt($validated['password']),
+                'role_id' => 2
+            ]);
 
-        $operator->fullname = $request->fullname;
-        $operator->username = $request->username;
-        $operator->password = bcrypt($request->password);
-        $operator->role_id = 2;
-
-        $operator->save();
-
-        return redirect('/operator');
+            return redirect('/operator/' . $operator->username)->with('success', 'Successfully created operator');
+        } catch (\Exception $e) {
+            return redirect('/operator')->with('error', 'Failed to create operator');
+        }
     }
     public function update(Operator $operator, Request $request) {
         if (Gate::denies('manage-operator')) abort(403);
 
-        $request->validate([
-            'fullname' => 'required|regex:/^[a-zA-Z\s]+$/',
-            'username' => 'required|unique:operators|regex:/^[a-zA-Z0-9\_]+$/',
-            'password' => 'required|confirmed|min:4'
-        ]);
+        try {
+            $validated =  $request->validate($this->validationRules);
 
-        $operator->fullname = $request->fullname;
-        $operator->username = $request->username;
-        $operator->password = bcrypt($request->password);
+            $operator->updateOrFail([
+                'fullname' => $validated['fullname'],
+                'username' => $validated['username'],
+                'password' => bcrypt($validated['password'])
+            ]);
 
-        $operator->save();
-
-        return redirect('/operator');
+            return redirect('/operator/' . $operator->username)->with('success', 'Successfully updated operator');
+        } catch (\Exception $e) {
+            return redirect('/operator/' . $operator->username)->with('error', 'Failed to update operator');
+        }
     }
     public function destroy(Operator $operator) {
         if (Gate::denies('manage-operator')) abort(403);
         if ($operator->role->name == 'Owner') abort(403);
 
-        $operator->delete();
+        try {
+            $operator->deleteOrFail();
 
-        return redirect('/operator');
+            return redirect('/operator')->with('success', 'Successfully deleted operator');
+        } catch (\Exception $e) {
+            return redirect('/operator')->with('error', 'Failed to delete operator');
+        }
     }
 }

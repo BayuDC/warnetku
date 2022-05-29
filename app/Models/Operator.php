@@ -11,6 +11,8 @@ class Operator extends Model {
 
     public $timestamps = false;
 
+    protected $guarded = ['id'];
+
     public function role() {
         return $this->belongsTo(Role::class);
     }

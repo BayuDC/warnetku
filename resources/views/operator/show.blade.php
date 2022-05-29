@@ -1,7 +1,10 @@
 @extends('layouts.main')
 @section('content')
 
-<h1 class="pb-3">Detail Operator - {{ $operator->fullname }}</h1>
+<h1 class="pb-3">Detail Operator</h1>
+
+@include('components.notif')
+
 <div class="row">
     <div class="col-lg-4 col-md-8">
         <table class="table">
