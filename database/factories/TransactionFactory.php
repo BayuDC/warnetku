@@ -27,15 +27,15 @@ class TransactionFactory extends Factory {
             $this->faker->dateTimeThisDecade(),
             $this->faker->dateTimeThisDecade(),
         ]);
-        $computerId = $this->faker->numberBetween(1, 20);
+        $computerId = $this->faker->numberBetween(1, 10);
 
         return [
             'customer' => $this->faker->name,
             'time_start' => Carbon::parse($time),
             'time_end' => Carbon::parse($time)->modify('+1 hour'),
-            'bill' => $computerId < 8 ? 5000 : 3000,
+            'bill' => $computerId <= 4 ? 5000 : 3000,
             'computer_id' => $computerId,
-            'operator_id' => $this->faker->numberBetween(1, 10),
+            'operator_id' => $this->faker->numberBetween(1, 5),
         ];
     }
 }

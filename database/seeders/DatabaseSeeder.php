@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder {
         Role::factory()->create(['name' => 'Owner']);
         Role::factory()->create(['name' => 'Worker']);
 
-        Operator::factory()->count(10)->sequence(function ($sequnce) {
+        Operator::factory()->count(5)->sequence(function ($sequnce) {
             return [
                 'fullname' => 'Operator ' . $sequnce->index,
                 'username' => 'operator' . $sequnce->index,
@@ -33,10 +33,10 @@ class DatabaseSeeder extends Seeder {
         ComputerType::factory()->create(['name' => 'Gaming']);
         ComputerType::factory()->create(['name' => 'Office']);
 
-        Computer::factory()->count(20)->sequence(function ($sequnce) {
+        Computer::factory()->count(10)->sequence(function ($sequnce) {
             return [
                 'name' => 'Computer ' . ($sequnce->index + 1),
-                'type_id' => $sequnce->index < 8 ? 1 : 2,
+                'type_id' => $sequnce->index < 4 ? 1 : 2,
             ];
         })->create();
 
@@ -71,6 +71,6 @@ class DatabaseSeeder extends Seeder {
             'type_id' => 2
         ]);
 
-        Transaction::factory()->count(rand(600, 800))->create();
+        Transaction::factory()->count(rand(400, 500))->create();
     }
 }
