@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 
-<h1 class="pb-3">Manage Computers</h1>
+<h1 class="pb-3">Computers</h1>
 
 @include('components.notif')
 

@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="mb-3 d-sm-flex d-block align-items-center">
-    <h1 class="">Manage Rental Prices</h1>
+    <h1 class="">Rental Prices</h1>
     <a href="/price/create" class="btn btn-outline-success ms-auto btn-lg">Add Rental Price</a>
 </div>
 

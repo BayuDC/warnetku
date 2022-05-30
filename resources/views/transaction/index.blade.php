@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="mb-3 d-sm-flex d-block align-items-center justify-content-between">
-    <h1>Manage Transactions</h1>
+    <h1>Transactions</h1>
     <div>
         <a href="/transaction/all" class="btn btn-lg btn-outline-primary">Transaction History</a>
         <a href="/transaction/create" class="btn btn-lg btn-outline-success">Add Transaction</a>

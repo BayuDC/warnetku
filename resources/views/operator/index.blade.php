@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="mb-3 d-sm-flex d-block align-items-center">
-    <h1 class="">Manage Operators</h1>
+    <h1 class="">Operators</h1>
     @can('manage-operator')
     <a href="/operator/create" class="btn btn-outline-success ms-auto btn-lg">Add Operator</a>
     @endcan
