@@ -8,7 +8,7 @@ use App\Models\Operator;
 
 class OperatorController extends Controller {
     private $validationRules = [
-        'fullname' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'fullname' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
         'username' => 'required|unique:operators|regex:/^[a-zA-Z0-9\_]+$/',
     ];
 

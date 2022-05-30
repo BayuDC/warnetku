@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/transaction/{transaction:id}', [TransactionController::class, 'destroy']);
 
     Route::get('/me', [ProfileController::class, 'index']);
+    Route::get('/me/edit', [ProfileController::class, 'edit']);
+    Route::put('/me', [ProfileController::class, 'update']);
 
     Route::get('/report', [ReportController::class, 'index']);
 
