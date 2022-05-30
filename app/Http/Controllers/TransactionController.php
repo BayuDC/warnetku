@@ -21,6 +21,11 @@ class TransactionController extends Controller {
             'transactions' => Transaction::getOngoing()
         ]);
     }
+    public function indexAll() {
+        return view('transaction.index_all', [
+            'transactions' => Transaction::getDone()
+        ]);
+    }
     public function show(Transaction $transaction) {
         return view('transaction.show', [
             'transaction' => $transaction->load(['operator'])

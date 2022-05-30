@@ -2,11 +2,7 @@
 @section('content')
 
 <div class="mb-3 d-sm-flex d-block align-items-center justify-content-between">
-    <h1>Manage Transactions</h1>
-    <div>
-        <a href="/transaction/all" class="btn btn-lg btn-outline-primary">Transaction History</a>
-        <a href="/transaction/create" class="btn btn-lg btn-outline-success">Add Transaction</a>
-    </div>
+    <h1>Transactions History</h1>
 </div>
 
 @include('components.notif')
@@ -20,18 +16,22 @@
                     <th>Customer</th>
                     <th>Computer</th>
                     <th>Duration</th>
-                    <th>Remaining time</th>
+                    <th>Total Bill</th>
                     <th>Detail</th>
                 </tr>
             </thead>
             <tbody>
+                @php
+                $start = ($transactions->currentPage() - 1) * $transactions->count() + 1
+                @endphp
+
                 @foreach($transactions as $i => $transaction)
                 <tr>
-                    <th class="col-1">{{ $i + 1 }}</th>
+                    <th class="col-1">{{ $i + $start }}</th>
                     <td>{{ $transaction->customer }}</td>
                     <td>{{ $transaction->computer->name }}</td>
                     <td>{{ $transaction->duration  }}</td>
-                    <td>{{ $transaction['remaining_time'] }}</td>
+                    <td>Rp. {{ $transaction['bill'] }}</td>
                     <td class="col-1">
                         <a href="/transaction/{{ $transaction->id }}" class="btn btn-sm btn-primary">Detail</a>
                     </td>
@@ -40,6 +40,9 @@
             </tbody>
         </table>
     </div>
+
+    {{ $transactions->links() }}
 </div>
+
 
 @endsection

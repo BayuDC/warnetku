@@ -68,4 +68,9 @@ class Transaction extends Model {
 
         return static::whereRaw("'{$now}' BETWEEN time_start AND time_end")->orderBy('time_start', 'desc')->get();
     }
+    public static function getDone() {
+        $now = Carbon::now()->toDateTimeString();
+
+        return static::query()->whereRaw("'{$now}' NOT BETWEEN time_start AND time_end")->orderBy('time_start', 'desc')->paginate(10);
+    }
 }
