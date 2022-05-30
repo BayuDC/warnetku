@@ -100,6 +100,6 @@ $ Run dev server
 $ php artisan serve
 ```
 
-## 📝 Todo
+## 💡 Contributions 
 
--   Refactor, there are so many inefficient and repetitive code ✅
+If something is not working properly feel free to write an issue.
