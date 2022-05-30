@@ -16,7 +16,17 @@ class TransactionFactory extends Factory {
      * @return array<string, mixed>
      */
     public function definition() {
-        $time = $this->faker->dateTimeThisMonth('yesterday');
+        $time = $this->faker->randomElement([
+            $this->faker->dateTimeBetween('-1 week', '-1 hour'),
+            $this->faker->dateTimeThisMonth(),
+            $this->faker->dateTimeThisYear(),
+            $this->faker->dateTimeThisYear(),
+            $this->faker->dateTimeThisYear(),
+            $this->faker->dateTimeThisDecade(),
+            $this->faker->dateTimeThisDecade(),
+            $this->faker->dateTimeThisDecade(),
+            $this->faker->dateTimeThisDecade(),
+        ]);
         $computerId = $this->faker->numberBetween(1, 20);
 
         return [
