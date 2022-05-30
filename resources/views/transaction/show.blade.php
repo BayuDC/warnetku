@@ -16,7 +16,7 @@
                 </tr>
                 <tr>
                     <th>Computer</th>
-                    <td>{{ $transaction->computer->name }}</td>
+                    <td>{!! $transaction->computer?->name ??'<i>Deleted</i>' !!}</td>
                 </tr>
                 <tr>
                     <th scope="row" class="">Duration</th>
@@ -71,7 +71,7 @@
                 </tr>
                 <tr>
                     <th>Added By</th>
-                    <td>{{ $transaction->operator->fullname }}</td>
+                    <td>{!! $transaction->operator?->fullname ?? '<i>Deleted</i>' !!}</td>
                 </tr>
             </tbody>
         </table>

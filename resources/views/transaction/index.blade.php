@@ -29,7 +29,7 @@
                 <tr>
                     <th class="col-1">{{ $i + 1 }}</th>
                     <td>{{ $transaction->customer }}</td>
-                    <td>{{ $transaction->computer->name }}</td>
+                    <td>{!! $transaction->computer?->name ??'<i>Deleted</i>' !!}</td>
                     <td>{{ $transaction->duration  }}</td>
                     <td>{{ $transaction['remaining_time'] }}</td>
                     <td class="col-1">

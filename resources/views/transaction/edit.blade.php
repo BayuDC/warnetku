@@ -18,7 +18,7 @@
             <div class="mb-4">
                 <label for="computer" class="form-label">Computer</label>
                 <select name="computer" id="computer" class="form-select @error('type') is-invalid @enderror">
-                    <option selected value="{{ $transaction->computer->id }}">{{ $transaction->computer->name }}</option>
+                    <option selected value="{{ $transaction->computer?->id }}">{{ $transaction->computer?->name }}</option>
                     @foreach($computers as $computer)
                     @if($computer->transactions->count() == 0)
                     <option value="{{ $computer->id }}" @if($computer->id == old('computer')) selected @endif>
