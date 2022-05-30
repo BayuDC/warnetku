@@ -12,9 +12,11 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/price">Price</a>
                 </li>
+                @can('is-owner')
                 <li class="nav-item">
                     <a class="nav-link active" href="/operator">Operator</a>
                 </li>
+                @endcan
                 <li class="nav-item">
                     <a class="nav-link active" href="/transaction">Transaction</a>
                 </li>

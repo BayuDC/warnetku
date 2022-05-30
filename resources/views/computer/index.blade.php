@@ -8,7 +8,7 @@
 <div class="row g-3">
     @foreach($computers as $computer)
     <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-        <a href="/computer/{{ $computer->id }}" class="p-4 bg-light border d-block text-dark text-decoration-none">
+        <a @can('is-owner') href="/computer/{{ $computer->id }}" @endcan class="p-4 bg-light border d-block text-dark text-decoration-none">
             <h3>{{ $computer->name }}</h3>
             <p class="">{{ $computer->type->name }}</p>
             <div class="text-muted"><i class="bi bi-dot"></i>
@@ -23,11 +23,13 @@
         </a>
     </div>
     @endforeach
+    @can('is-owner')
     <div class="col-lg-3 col-md-4 col-sm-6 col-12">
         <a href="/computer/create" class="p-4 bg-light border border-success d-block text-success h-100">
             <h3>Add Computer +</h3>
         </a>
     </div>
+    @endcan
 </div>
 
 @endsection

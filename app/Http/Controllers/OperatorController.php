@@ -14,29 +14,33 @@ class OperatorController extends Controller {
     ];
 
     public function index() {
+        if (!Gate::check('is-owner')) abort(403);
+
         return view('operator.index', [
             'operators' => Operator::with('role')->paginate(10)
         ]);
     }
     public function show(Operator $operator) {
+        if (!Gate::check('is-owner')) abort(403);
+
         return view('operator.show', [
             'operator' => $operator->load('role')
         ]);
     }
     public function create() {
-        if (Gate::denies('manage-operator')) abort(403);
+        if (!Gate::check('is-owner')) abort(403);
 
         return view('operator.create');
     }
     public function edit(Operator $operator) {
-        if (Gate::denies('manage-operator')) abort(403);
+        if (!Gate::check('is-owner')) abort(403);
 
         return view('operator.edit', [
             'operator' => $operator
         ]);
     }
     public function store(Request $request) {
-        if (Gate::denies('manage-operator')) abort(403);
+        if (!Gate::check('is-owner')) abort(403);
 
         $validated = $request->validate($this->validationRules);
 
@@ -54,7 +58,7 @@ class OperatorController extends Controller {
         }
     }
     public function update(Operator $operator, Request $request) {
-        if (Gate::denies('manage-operator')) abort(403);
+        if (!Gate::check('is-owner')) abort(403);
 
         $validated =  $request->validate($this->validationRules);
 
@@ -71,7 +75,7 @@ class OperatorController extends Controller {
         }
     }
     public function destroy(Operator $operator) {
-        if (Gate::denies('manage-operator')) abort(403);
+        if (!Gate::check('is-owner')) abort(403);
         if ($operator->role->name == 'Owner') abort(403);
 
         try {

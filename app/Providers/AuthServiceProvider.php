@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider {
     public function boot() {
         $this->registerPolicies();
 
-        Gate::define('manage-operator', function (Operator $operator) {
+        Gate::define('is-owner', function (Operator $operator) {
             return $operator->role_id == 1;
         });
         Gate::define('manage-transaction', function (Operator $operator, Transaction $transaction) {

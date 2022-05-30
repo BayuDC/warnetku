@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Models\RentalPrice;
 use App\Models\ComputerType;
 
@@ -21,16 +22,22 @@ class PriceController extends Controller {
         ]);
     }
     public function show(RentalPrice $rental) {
+        if (!Gate::check('is-owner')) abort(403);
+
         return view('price.show', [
             'rental' => $rental->load('type')
         ]);
     }
     public function create() {
+        if (!Gate::check('is-owner')) abort(403);
+
         return view('price.create', [
             'types' => ComputerType::all()
         ]);
     }
     public function edit(RentalPrice $rental) {
+        if (!Gate::check('is-owner')) abort(403);
+
         return view('price.edit', [
             'rental' => $rental,
             'types' => ComputerType::all()
@@ -38,6 +45,8 @@ class PriceController extends Controller {
     }
 
     public function store(Request $request) {
+        if (!Gate::check('is-owner')) abort(403);
+
         $validated = $request->validate($this->validationRules);
 
         try {
@@ -54,6 +63,8 @@ class PriceController extends Controller {
         }
     }
     public function update(RentalPrice $rental, Request $request) {
+        if (!Gate::check('is-owner')) abort(403);
+
         $validated =  $request->validate($this->validationRules);
 
         try {
@@ -70,6 +81,8 @@ class PriceController extends Controller {
         }
     }
     public function destroy(RentalPrice $rental) {
+        if (!Gate::check('is-owner')) abort(403);
+
         try {
             $rental->deleteOrFail();
 

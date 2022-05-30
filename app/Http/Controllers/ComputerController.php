@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Computer;
 use App\Models\ComputerType;
+use Carbon\Carbon;
 
 class ComputerController extends Controller {
     private $validationRules = [
@@ -19,22 +20,30 @@ class ComputerController extends Controller {
         ]);
     }
     public function show(Computer $computer) {
+        if (!Gate::check('is-owner')) abort(403);
+
         return view('computer.show', [
             'computer' => $computer->customLoad()
         ]);
     }
     public function create() {
+        if (!Gate::check('is-owner')) abort(403);
+
         return view('computer.create', [
             'types' => ComputerType::all()
         ]);
     }
     public function edit(Computer $computer) {
+        if (!Gate::check('is-owner')) abort(403);
+
         return view('computer.edit', [
             'computer' => $computer,
             'types' => ComputerType::all()
         ]);
     }
     public function store(Request $request) {
+        if (!Gate::check('is-owner')) abort(403);
+
         $validated = $request->validate($this->validationRules);
 
         try {
@@ -49,6 +58,8 @@ class ComputerController extends Controller {
         }
     }
     public function update(Computer $computer, Request $request) {
+        if (!Gate::check('is-owner')) abort(403);
+
         $validated = $request->validate($this->validationRules);
 
         try {
@@ -63,6 +74,8 @@ class ComputerController extends Controller {
         }
     }
     public function destroy(Computer $computer) {
+        if (!Gate::check('is-owner')) abort(403);
+
         try {
             $computer->deleteOrFail();
 

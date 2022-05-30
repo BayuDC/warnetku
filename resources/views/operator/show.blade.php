@@ -23,7 +23,6 @@
                 </tr>
             </tbody>
         </table>
-        @can('manage-operator')
         <div class="pt-2">
             <a href="/operator/{{ $operator->username }}/edit" class="btn btn-primary">Edit</a>
             @if($operator->role->name != 'Owner')
@@ -50,7 +49,6 @@
             </div>
             @endif
         </div>
-        @endcan
     </div>
 </div>
 
