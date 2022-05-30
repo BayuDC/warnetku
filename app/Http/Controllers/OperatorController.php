@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Operator;
 
 class OperatorController extends Controller {
-    private $validationRules = [
-        'fullname' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
-        'username' => 'required|unique:operators|regex:/^[a-zA-Z0-9\_]+$/',
-    ];
-
     public function index() {
         if (!Gate::check('is-owner')) abort(403);
 
@@ -41,8 +36,11 @@ class OperatorController extends Controller {
     public function store(Request $request) {
         if (!Gate::check('is-owner')) abort(403);
 
-        $this->validationRules['password'] = 'required|confirmed|min:4';
-        $validated = $request->validate($this->validationRules);
+        $validated = $request->validate([
+            'fullname' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
+            'username' => 'required|unique:operators|regex:/^[a-zA-Z0-9\_]+$/',
+            'password' => 'required|confirmed|min:4',
+        ]);
 
         try {
             $operator = Operator::query()->create([
@@ -60,13 +58,18 @@ class OperatorController extends Controller {
     public function update(Operator $operator, Request $request) {
         if (!Gate::check('is-owner')) abort(403);
 
-        $validated =  $request->validate($this->validationRules);
+        $validated = $request->validate([
+            'fullname' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
+            'username' => [
+                'required',
+                'exclude_if:username,' . $operator->username,
+                'unique:operators',
+                'regex:/^[a-zA-Z0-9\_]+$/'
+            ],
+        ]);
 
         try {
-            $operator->updateOrFail([
-                'fullname' => $validated['fullname'],
-                'username' => $validated['username'],
-            ]);
+            $operator->updateOrFail($validated);
 
             return redirect('/operator/' . $operator->username)->with('success', 'Successfully updated operator');
         } catch (\Exception $e) {
