@@ -5,14 +5,14 @@ rental transaction in an internet cafe(it's called warnet in my country).
 This app is made to ease the work of internet cafe operators. For example,
 determine the price to be paid by the customer.
 
+![Web Status](https://img.shields.io/website.svg?url=https://warnetku.up.railway.app&style=for-the-badge)
 ![Web Status](https://img.shields.io/website.svg?url=https://warnetku.herokuapp.com&style=for-the-badge)
 
 ## ✨ Demo
 
-Web url: https://warnetku.herokuapp.com
-
-I am sorry if the website is slow 😢.
-I used Heroku free dyno for the web and Railway free plan for the database.
+Web url: https://warnetku.up.railway.app  
+Alternative: https://warnetku.herokuapp.com (slower)  
+(Thanks to Heroku, Railway, and Clever Cloud)
 
 You can use the account below for login access
 
