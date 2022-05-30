@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ComputerController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\OperatorController;
@@ -57,6 +58,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/transaction/{transaction:id}', [TransactionController::class, 'update']);
     Route::patch('/transaction/{transaction:id}/extend', [TransactionController::class, 'extend']);
     Route::delete('/transaction/{transaction:id}', [TransactionController::class, 'destroy']);
+
+    Route::get('/me', [ProfileController::class, 'index']);
 
     Route::get('/report', [ReportController::class, 'index']);
 

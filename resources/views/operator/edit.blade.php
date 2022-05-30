@@ -22,20 +22,6 @@
                 <small class="text-danger text-end d-block mt-2">{{ $message }}</small>
                 @enderror
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required>
-                @error('password')
-                <small class="text-danger text-end d-block mt-2">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="mb-4">
-                <label for="password_confirmation" class="form-label">Confirm Password</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" required>
-                @error('password_confirmation')
-                <small class="text-danger text-end d-block mt-2">{{ $message }}</small>
-                @enderror
-            </div>
             <button class="btn btn-success d-block" type="submit">Save</button>
         </form>
     </div>

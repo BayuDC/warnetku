@@ -33,6 +33,9 @@
                         <li>
                             <h6 class="dropdown-header">Login as <span class="fw-bold">{{ Auth::user()->fullname }}</span></h6>
                         </li>
+                        <li class="dropdown-item">
+                            <a href="/me" class="link-dark">My Profile</a>
+                        </li>
                         <li class="dropdown-divider"></li>
                         <li class="dropdown-item">
                             <a href="/logout" class="link-danger">Logout</a>
