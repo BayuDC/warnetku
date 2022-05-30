@@ -61,7 +61,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/me', [ProfileController::class, 'index']);
     Route::get('/me/edit', [ProfileController::class, 'edit']);
+    Route::get('/me/change-password', [ProfileController::class, 'editPassword']);
     Route::put('/me', [ProfileController::class, 'update']);
+    Route::put('/me/change-password', [ProfileController::class, 'updatePassword']);
 
     Route::get('/report', [ReportController::class, 'index']);
 

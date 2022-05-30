@@ -36,4 +36,25 @@ class ProfileController extends Controller {
             return redirect('/me')->with('error', 'Failed to update profile');
         }
     }
+    public function editPassword() {
+        return view('profile.edit-password', [
+            'operator' => Auth::user()
+        ]);
+    }
+    public function updatePassword(Request $request) {
+        $validated = $request->validate([
+            'password_old' => 'required|current_password',
+            'password' => 'required|confirmed|min:4',
+        ]);
+
+        try {
+            Auth::user()->updateOrFail([
+                'password' => bcrypt($validated['password'])
+            ]);
+
+            return redirect('/me')->with('success', 'Password updated successfully');
+        } catch (\Exception $e) {
+            return redirect('/me')->with('error', 'Failed to update password');
+        }
+    }
 }
