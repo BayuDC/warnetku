@@ -29,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider {
             return $operator->role_id == 1;
         });
         Gate::define('manage-transaction', function (Operator $operator, Transaction $transaction) {
-            return $operator->id == $transaction->operator_id;
+            return $operator->role_id == 1 || $operator->id == $transaction->operator_id;
         });
     }
 }
