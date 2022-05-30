@@ -22,7 +22,7 @@
             </thead>
             <tbody>
                 @php
-                $start = ($transactions->currentPage() - 1) * $transactions->count() + 1
+                $start = ($transactions->currentPage() - 1) * 10 + 1
                 @endphp
 
                 @foreach($transactions as $i => $transaction)
