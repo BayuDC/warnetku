@@ -71,6 +71,6 @@ class DatabaseSeeder extends Seeder {
             'type_id' => 2
         ]);
 
-        Transaction::factory()->count(rand(400, 500))->create();
+        Transaction::factory()->count(rand(100, 120))->create();
     }
 }
