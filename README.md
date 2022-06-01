@@ -5,8 +5,8 @@ rental transaction in an internet cafe(it's called warnet in my country).
 This app is made to ease the work of internet cafe operators. For example,
 determine the price to be paid by the customer.
 
-![Web Status](https://img.shields.io/website.svg?url=https://warnetku.up.railway.app&style=for-the-badge)
-![Web Status](https://img.shields.io/website.svg?url=https://warnetku.herokuapp.com&style=for-the-badge)
+[![Server 1 Status](https://img.shields.io/website.svg?url=https://warnetku.up.railway.app&style=for-the-badge&label=Server%201)](https://warnetku.up.railway.app)
+[![Server 2 Status](https://img.shields.io/website.svg?url=https://warnetku.herokuapp.com&style=for-the-badge&label=Server%202)](https://warnetku.herokuapp.com)
 
 ## ✨ Demo
 
@@ -100,6 +100,6 @@ $ Run dev server
 $ php artisan serve
 ```
 
-## 💡 Contributions 
+## 💡 Contributions
 
 If something is not working properly feel free to write an issue.
