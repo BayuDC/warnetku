@@ -25,45 +25,37 @@ Route::middleware('auth')->group(function () {
         return view('home');
     });
 
-    Route::get('/computer', [ComputerController::class, 'index']);
-    Route::get('/computer/create', [ComputerController::class, 'create']);
-    Route::post('/computer', [ComputerController::class, 'store']);
-    Route::get('/computer/{computer:id}', [ComputerController::class, 'show']);
-    Route::get('/computer/{computer:id}/edit', [ComputerController::class, 'edit']);
-    Route::put('/computer/{computer:id}', [ComputerController::class, 'update']);
-    Route::delete('/computer/{computer:id}', [ComputerController::class, 'destroy']);
+    Route::resource('computer', ComputerController::class)->scoped([
+        'computer' => 'id'
+    ]);
 
-    Route::get('/price', [PriceController::class, 'index']);
-    Route::get('/price/create', [PriceController::class, 'create']);
-    Route::post('/price', [PriceController::class, 'store']);
-    Route::get('/price/{rental:id}', [PriceController::class, 'show']);
-    Route::get('/price/{rental:id}/edit', [PriceController::class, 'edit']);
-    Route::put('/price/{rental:id}', [PriceController::class, 'update']);
-    Route::delete('/price/{rental:id}', [PriceController::class, 'destroy']);
+    Route::resource('price', PriceController::class)
+        ->parameters([
+            'price' => 'rental'
+        ])->scoped([
+            'rental' => 'id'
+        ]);
 
-    Route::get('/operator', [OperatorController::class, 'index']);
-    Route::get('/operator/create', [OperatorController::class, 'create']);
-    Route::post('/operator', [OperatorController::class, 'store']);
-    Route::get('/operator/{operator:username}', [OperatorController::class, 'show']);
-    Route::get('/operator/{operator:username}/edit', [OperatorController::class, 'edit']);
-    Route::put('/operator/{operator:id}', [OperatorController::class, 'update']);
-    Route::delete('/operator/{operator:id}', [OperatorController::class, 'destroy']);
+    Route::resource('operator', OperatorController::class)->except(['show', 'edit'])->scoped([
+        'operator' => 'id'
+    ]);
+    Route::resource('operator', OperatorController::class)->only(['show', 'edit'])->scoped([
+        'operator' => 'username'
+    ]);
 
-    Route::get('/transaction', [TransactionController::class, 'index']);
     Route::get('/transaction/all', [TransactionController::class, 'indexAll']);
-    Route::get('/transaction/create', [TransactionController::class, 'create']);
-    Route::post('/transaction', [TransactionController::class, 'store']);
-    Route::get('/transaction/{transaction:id}', [TransactionController::class, 'show']);
-    Route::get('/transaction/{transaction:id}/edit', [TransactionController::class, 'edit']);
-    Route::put('/transaction/{transaction:id}', [TransactionController::class, 'update']);
     Route::patch('/transaction/{transaction:id}/extend', [TransactionController::class, 'extend']);
-    Route::delete('/transaction/{transaction:id}', [TransactionController::class, 'destroy']);
+    Route::resource('transaction', TransactionController::class)->scoped([
+        'transaction' => 'id'
+    ]);
 
-    Route::get('/me', [ProfileController::class, 'index']);
-    Route::get('/me/edit', [ProfileController::class, 'edit']);
-    Route::get('/me/change-password', [ProfileController::class, 'editPassword']);
-    Route::put('/me', [ProfileController::class, 'update']);
-    Route::put('/me/change-password', [ProfileController::class, 'updatePassword']);
+    Route::prefix('me')->group(function () {
+        Route::get('/me', [ProfileController::class, 'index']);
+        Route::get('/edit', [ProfileController::class, 'edit']);
+        Route::get('/change-password', [ProfileController::class, 'editPassword']);
+        Route::put('/', [ProfileController::class, 'update']);
+        Route::put('/change-password', [ProfileController::class, 'updatePassword']);
+    });
 
     Route::get('/report', [ReportController::class, 'index']);
 
