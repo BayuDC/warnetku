@@ -43,11 +43,16 @@ Route::middleware('auth')->group(function () {
         'operator' => 'username'
     ]);
 
-    Route::get('/transaction/all', [TransactionController::class, 'indexAll']);
-    Route::patch('/transaction/{transaction:id}/extend', [TransactionController::class, 'extend']);
-    Route::resource('transaction', TransactionController::class)->scoped([
-        'transaction' => 'id'
-    ]);
+    Route::prefix('transaction')->group(function () {
+        Route::get('/transaction/all', [TransactionController::class, 'indexAll']);
+        Route::patch('/transaction/{transaction:id}/extend', [TransactionController::class, 'extend']);
+        Route::resource('/', TransactionController::class)->parameters([
+            '' => 'transaction'
+        ])->scoped([
+            'transaction' => 'id'
+        ]);
+    });
+
 
     Route::prefix('me')->group(function () {
         Route::get('/me', [ProfileController::class, 'index']);
