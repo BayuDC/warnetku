@@ -44,18 +44,18 @@ Route::middleware('auth')->group(function () {
     ]);
 
     Route::prefix('transaction')->group(function () {
-        Route::get('/transaction/all', [TransactionController::class, 'indexAll']);
-        Route::patch('/transaction/{transaction:id}/extend', [TransactionController::class, 'extend']);
+        Route::get('/all', [TransactionController::class, 'indexAll']);
+        Route::patch('/{transaction:id}/extend', [TransactionController::class, 'extend']);
         Route::resource('/', TransactionController::class)->parameters([
             '' => 'transaction'
         ])->scoped([
             'transaction' => 'id'
-        ]);
+        ])->names('transaction');
     });
 
 
     Route::prefix('me')->group(function () {
-        Route::get('/me', [ProfileController::class, 'index']);
+        Route::get('/', [ProfileController::class, 'index']);
         Route::get('/edit', [ProfileController::class, 'edit']);
         Route::get('/change-password', [ProfileController::class, 'editPassword']);
         Route::put('/', [ProfileController::class, 'update']);
