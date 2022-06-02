@@ -100,6 +100,14 @@ $ Run dev server
 $ php artisan serve
 ```
 
+## 📝 Todo
+
+-   Implement naming route  
+    All routes in this project are anonymous(except login).
+    Redirect actions and anchor elements are use hardcoded route.
+-   Make fast and clean code  
+    There is still inefficient and repetitive code
+
 ## 💡 Contributions
 
 If something is not working properly feel free to write an issue.
