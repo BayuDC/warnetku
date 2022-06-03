@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-lg-4 col-md-8">
-        <form action="/me/change-password" method="post">
+        <form action="{{ route('me.update-password') }}" method="post">
             @csrf
             @method('put')
 

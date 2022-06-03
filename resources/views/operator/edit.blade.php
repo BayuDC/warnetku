@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-lg-4 col-md-8">
-        <form action="/operator/{{ $operator->id }}" method="post">
+        <form action="{{ route('operator.update', $operator->id) }}" method="post">
             @csrf
             @method('put')
             <div class="mb-3">

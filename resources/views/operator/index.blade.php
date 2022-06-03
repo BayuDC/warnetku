@@ -3,7 +3,7 @@
 
 <div class="mb-3 d-sm-flex d-block align-items-center">
     <h1 class="">Operators</h1>
-    <a href="/operator/create" class="btn btn-outline-success ms-auto btn-lg">Add Operator</a>
+    <a href="{{ route('operator.create') }}" class="btn btn-outline-success ms-auto btn-lg">Add Operator</a>
 </div>
 
 @include('components.notif')
@@ -28,7 +28,7 @@
                     <td>{{ $operator->username }}</td>
                     <td>{{ $operator->role->name }}</td>
                     <td class="col-1">
-                        <a href="/operator/{{ $operator->username }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('operator.show', $operator->username) }}" class="btn btn-sm btn-primary">
                             Detail
                         </a>
                     </td>
