@@ -2,40 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\PriceStoreRequest;
+use App\Http\Requests\PriceUpdateRequest;
 use Illuminate\Support\Facades\Gate;
 use App\Models\RentalPrice;
 use App\Models\ComputerType;
+use Exception;
 
-class PriceController extends Controller {
-    private $validationRules = [
-        'name' => 'required|regex:/^[0-9a-zA-Z\s\-]+$/',
-        'price' => 'required|integer|gt:0',
-        'duration' => 'required|integer|gt:0',
-        'type' => 'required|exists:App\Models\ComputerType,id'
-    ];
+class PriceController extends Controller
+{
 
-    public function index() {
+    public function index()
+    {
+        $price = RentalPrice::all();
+
         return view('price.index', [
-            'gaming_prices' =>  RentalPrice::where('type_id', 1)->get(),
-            'office_prices' =>  RentalPrice::where('type_id', 2)->get()
+            'gaming_prices' =>  $price->where('type_id', 1),
+            'office_prices' =>  $price->where('type_id', 2)
         ]);
     }
-    public function show(RentalPrice $rental) {
+
+    public function show(RentalPrice $rental)
+    {
         if (!Gate::check('is-owner')) abort(403);
 
         return view('price.show', [
             'rental' => $rental->load('type')
         ]);
     }
-    public function create() {
+
+    public function create()
+    {
         if (!Gate::check('is-owner')) abort(403);
 
         return view('price.create', [
             'types' => ComputerType::all()
         ]);
     }
-    public function edit(RentalPrice $rental) {
+
+    public function edit(RentalPrice $rental)
+    {
         if (!Gate::check('is-owner')) abort(403);
 
         return view('price.edit', [
@@ -44,28 +50,35 @@ class PriceController extends Controller {
         ]);
     }
 
-    public function store(Request $request) {
+    public function store(PriceStoreRequest $request)
+    {
         if (!Gate::check('is-owner')) abort(403);
 
-        $validated = $request->validate($this->validationRules);
+        $validated = $request->validated();
 
         try {
-            $rental = RentalPrice::query()->create([
+            $rental = RentalPrice::create([
                 'name' => $validated['name'],
                 'price' => $validated['price'],
                 'duration' => $validated['duration'],
                 'type_id' => $validated['type']
             ]);
 
-            return redirect('/price/' . $rental->id)->with('success', 'Successfully created rentar price');
-        } catch (\Exception $e) {
-            return redirect('/price')->with('error', 'Failed to create rentar price');
+            return redirect()
+                ->route('price.show', $rental->id)
+                ->with('success', 'Successfully created rentar price');
+        } catch (Exception $e) {
+            return redirect()
+                ->route('price.index')
+                ->with('error', 'Failed to create rentar price');
         }
     }
-    public function update(RentalPrice $rental, Request $request) {
+
+    public function update(PriceUpdateRequest $request, RentalPrice $rental)
+    {
         if (!Gate::check('is-owner')) abort(403);
 
-        $validated =  $request->validate($this->validationRules);
+        $validated =  $request->validated();
 
         try {
             $rental->updateOrFail([
@@ -75,20 +88,30 @@ class PriceController extends Controller {
                 'type_id' => $validated['type']
             ]);
 
-            return redirect('/price/' . $rental->id)->with('success', 'Successfully updated rentar price');
-        } catch (\Exception $e) {
-            return redirect('/price/' . $rental->id)->with('error', 'Failed to update rentar price');
+            return redirect()
+                ->route('price.show', $rental->id)
+                ->with('success', 'Successfully updated rentar price');
+        } catch (Exception $e) {
+            return redirect()
+                ->route('price.show', $rental->id)
+                ->with('error', 'Failed to update rentar price');
         }
     }
-    public function destroy(RentalPrice $rental) {
+
+    public function destroy(RentalPrice $rental)
+    {
         if (!Gate::check('is-owner')) abort(403);
 
         try {
             $rental->deleteOrFail();
 
-            return redirect('/price')->with('success', 'Successfully deleted rentar price');
-        } catch (\Exception $e) {
-            return redirect('/price')->with('error', 'Failed to delete rentar price');
+            return redirect()
+                ->route('price.index')
+                ->with('success', 'Successfully deleted rentar price');
+        } catch (Exception $e) {
+            return redirect()
+                ->route('price.index')
+                ->with('error', 'Failed to delete rentar price');
         }
     }
 }
