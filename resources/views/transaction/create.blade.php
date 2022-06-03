@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-lg-4 col-md-8">
-        <form action="/transaction" method="post">
+        <form action="{{ route('transaction.store') }}" method="post">
             @csrf
             <div class="mb-3">
                 <label for="customer" class="form-label">Customer Name</label>

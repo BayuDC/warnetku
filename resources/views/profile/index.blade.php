@@ -24,8 +24,8 @@
             </tbody>
         </table>
         <div class="pt-2">
-            <a href="/me/edit" class="btn btn-primary">Edit</a>
-            <a href="/me/change-password" class="btn btn-primary">Change Password</a>
+            <a href="{{ route('me.edit') }}" class="btn btn-primary">Edit</a>
+            <a href="{{ route('me.edit-password') }}" class="btn btn-primary">Change Password</a>
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@
 
 <div class="row px-3 d-flex justify-content-center align-items-center vh-100">
     <div class="col p-4 bg-light border" style="max-width: 400px;">
-        <form action="/login" method="post">
+        <form action="{{ route('auth') }}" method="post">
             @csrf
             <div class="mb-4">
                 <h2>Warnetku - Login</h2>

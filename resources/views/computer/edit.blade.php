@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-lg-4 col-md-8">
-        <form action="/computer/{{ $computer->id }}" method="post">
+        <form action="{{ route('computer.update', $computer->id) }}" method="post">
             @csrf
             @method('put')
             <div class="mb-3">

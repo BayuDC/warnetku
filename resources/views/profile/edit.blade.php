@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-lg-4 col-md-8">
-        <form action="/me" method="post">
+        <form action="{{ route('me.show') }}" method="post">
             @csrf
             @method('put')
             <div class="mb-3">

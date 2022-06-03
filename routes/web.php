@@ -23,7 +23,7 @@ use App\Http\Controllers\ReportController;
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('home');
-    });
+    })->name('home');
 
     Route::resource('computer', ComputerController::class)->scoped([
         'computer' => 'id'
@@ -43,31 +43,31 @@ Route::middleware('auth')->group(function () {
         'operator' => 'username'
     ]);
 
-    Route::prefix('transaction')->group(function () {
-        Route::get('/all', [TransactionController::class, 'indexAll']);
-        Route::patch('/{transaction:id}/extend', [TransactionController::class, 'extend']);
+    Route::prefix('transaction')->name('transaction.')->group(function () {
+        Route::get('/all', [TransactionController::class, 'indexAll'])->name('all');
+        Route::patch('/{transaction:id}/extend', [TransactionController::class, 'extend'])->name('extends');
         Route::resource('/', TransactionController::class)->parameters([
             '' => 'transaction'
         ])->scoped([
             'transaction' => 'id'
-        ])->names('transaction');
+        ]);
     });
 
 
-    Route::prefix('me')->group(function () {
-        Route::get('/', [ProfileController::class, 'index']);
-        Route::get('/edit', [ProfileController::class, 'edit']);
-        Route::get('/change-password', [ProfileController::class, 'editPassword']);
-        Route::put('/', [ProfileController::class, 'update']);
-        Route::put('/change-password', [ProfileController::class, 'updatePassword']);
+    Route::prefix('me')->name('me.')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('show');
+        Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
+        Route::get('/change-password', [ProfileController::class, 'editPassword'])->name('edit-password');
+        Route::put('/', [ProfileController::class, 'update'])->name('update');
+        Route::put('/change-password', [ProfileController::class, 'updatePassword'])->name('update-password');
     });
 
-    Route::get('/report', [ReportController::class, 'index']);
+    Route::get('/report', [ReportController::class, 'index'])->name('report');
 
-    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'login'])->name('auth');
 });

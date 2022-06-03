@@ -1,27 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container">
-        <a class="navbar-brand" href="/">Warnetku</a>
+        <a class="navbar-brand" href="{{route('home')}}">Warnetku</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/computer">Computer</a>
+                    <a class="nav-link active" href="{{ route('computer.index') }}">Computer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/price">Price</a>
+                    <a class="nav-link active" href="{{ route('price.index') }}">Price</a>
                 </li>
                 @can('is-owner')
                 <li class="nav-item">
-                    <a class="nav-link active" href="/operator">Operator</a>
+                    <a class="nav-link active" href="{{ route('operator.index') }}">Operator</a>
                 </li>
                 @endcan
                 <li class="nav-item">
-                    <a class="nav-link active" href="/transaction">Transaction</a>
+                    <a class="nav-link active" href="{{ route('transaction.index') }}">Transaction</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/report">Report</a>
+                    <a class="nav-link active" href="{{ route('report') }}">Report</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
@@ -34,11 +34,11 @@
                             <h6 class="dropdown-header">Login as <span class="fw-bold">{{ Auth::user()->fullname }}</span></h6>
                         </li>
                         <li class="dropdown-item">
-                            <a href="/me" class="link-dark">My Profile</a>
+                            <a href="{{ route('me.show') }}" class="link-dark">My Profile</a>
                         </li>
                         <li class="dropdown-divider"></li>
                         <li class="dropdown-item">
-                            <a href="/logout" class="link-danger">Logout</a>
+                            <a href="{{ route('logout') }}" class="link-danger">Logout</a>
                         </li>
                     </ul>
                 </li>

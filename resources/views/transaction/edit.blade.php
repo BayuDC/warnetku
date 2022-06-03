@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-lg-4 col-md-8">
-        <form action="/transaction/{{ $transaction->id }}" method="post">
+        <form action="{{ route('transaction.update', $transaction->id) }}" method="post">
             @csrf
             @method('put')
             <div class="mb-3">
