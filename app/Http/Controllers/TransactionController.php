@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TransactionStoreRequest;
-use App\Http\Requests\TransactionUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\TransactionExtendRequest;
+use App\Http\Requests\TransactionStoreRequest;
+use App\Http\Requests\TransactionUpdateRequest;
 use App\Models\Transaction;
 use App\Models\Computer;
 use App\Models\RentalPrice;
@@ -88,11 +89,11 @@ class TransactionController extends Controller {
         }
     }
 
-    public function extend(Request $request, Transaction $transaction) {
+    public function extend(TransactionExtendRequest $request, Transaction $transaction) {
         if (Gate::denies('manage-transaction', $transaction)) abort(403);
         if ($transaction->status != "Ongoing") abort(404);
 
-        $validated = $request->validate(['duration' => 'required|integer|min:1|max:24']);
+        $validated = $request->validated();
 
         try {
             $transaction->updateOrFail([
