@@ -30,7 +30,7 @@
                     <th class="col-1">{{ $i + 1 }}</th>
                     <td>{{ $transaction->customer }}</td>
                     <td>{!! $transaction->computer?->name ??'<i>Deleted</i>' !!}</td>
-                    <td>{{ $transaction->duration  }}</td>
+                    <td>{{ $transaction->duration_pretty  }}</td>
                     <td>{{ $transaction['remaining_time'] }}</td>
                     <td class="col-1">
                         <a href="{{ route('transaction.show', $transaction->id) }}" class="btn btn-sm btn-primary">Detail</a>

@@ -19,7 +19,7 @@
                 </tr>
                 <tr>
                     <th scope="row" class="col-2">Duration</th>
-                    <td>{{ $rental->duration }}</td>
+                    <td>{{ $rental->duration_pretty }}</td>
                 </tr>
                 <tr>
                     <th scope="row" class="col-2">Type</th>

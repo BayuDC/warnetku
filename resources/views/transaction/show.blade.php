@@ -21,7 +21,7 @@
                 <tr>
                     <th scope="row" class="">Duration</th>
                     <td>
-                        {{ $transaction->duration }}
+                        {{ $transaction->duration_pretty }}
                         @if($transaction->status == 'Ongoing')
                         @can('manage-transaction', $transaction)
                         <button class="btn badge btn-success ms-2" type="button" data-bs-toggle="modal" data-bs-target="#modalAdd">Add</button>

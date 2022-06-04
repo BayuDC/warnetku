@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\PriceStoreRequest;
 use App\Http\Requests\PriceUpdateRequest;
-use Illuminate\Support\Facades\Gate;
 use App\Models\RentalPrice;
 use App\Models\ComputerType;
 use Exception;
 
-class PriceController extends Controller
-{
+class PriceController extends Controller {
 
-    public function index()
-    {
+    public function index() {
         $price = RentalPrice::all();
 
         return view('price.index', [
@@ -22,8 +20,7 @@ class PriceController extends Controller
         ]);
     }
 
-    public function show(RentalPrice $rental)
-    {
+    public function show(RentalPrice $rental) {
         if (!Gate::check('is-owner')) abort(403);
 
         return view('price.show', [
@@ -31,8 +28,7 @@ class PriceController extends Controller
         ]);
     }
 
-    public function create()
-    {
+    public function create() {
         if (!Gate::check('is-owner')) abort(403);
 
         return view('price.create', [
@@ -40,8 +36,7 @@ class PriceController extends Controller
         ]);
     }
 
-    public function edit(RentalPrice $rental)
-    {
+    public function edit(RentalPrice $rental) {
         if (!Gate::check('is-owner')) abort(403);
 
         return view('price.edit', [
@@ -50,8 +45,7 @@ class PriceController extends Controller
         ]);
     }
 
-    public function store(PriceStoreRequest $request)
-    {
+    public function store(PriceStoreRequest $request) {
         if (!Gate::check('is-owner')) abort(403);
 
         $validated = $request->validated();
@@ -74,8 +68,7 @@ class PriceController extends Controller
         }
     }
 
-    public function update(PriceUpdateRequest $request, RentalPrice $rental)
-    {
+    public function update(PriceUpdateRequest $request, RentalPrice $rental) {
         if (!Gate::check('is-owner')) abort(403);
 
         $validated =  $request->validated();
@@ -98,8 +91,7 @@ class PriceController extends Controller
         }
     }
 
-    public function destroy(RentalPrice $rental)
-    {
+    public function destroy(RentalPrice $rental) {
         if (!Gate::check('is-owner')) abort(403);
 
         try {

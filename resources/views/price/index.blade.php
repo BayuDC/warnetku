@@ -21,7 +21,7 @@
                     {{ $rental->type->name }}
                 </div>
                 <div class="fw-bold">
-                    {{ $rental->duration }}
+                    {{ $rental['duration_pretty'] }}
                 </div>
             </div>
         </a>
@@ -39,7 +39,7 @@
                     {{ $rental->type->name }}
                 </div>
                 <div class="fw-bold">
-                    {{ $rental->duration }}
+                    {{ $rental['duration_pretty'] }}
                 </div>
             </div>
         </a>

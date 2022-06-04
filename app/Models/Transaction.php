@@ -42,25 +42,19 @@ class Transaction extends Model {
         return $this->belongsTo(Computer::class);
     }
 
-    public function getTimeStartAttribute() {
+    public function getTimeStartPrettyAttribute() {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['time_start'])->setTimezone('Asia/Jakarta');
     }
-    public function getTimeEndAttribute() {
+    public function getTimeEndPrettyAttribute() {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['time_end'])->setTimezone('Asia/Jakarta');
-    }
-    public function getTimeEndRawAttribute() {
-        return $this->attributes['time_end'];
     }
     public function getRemainingTimeAttribute() {
         $diff = $this->status == 'Done' ? 0 : Carbon::now()->diffInMinutes($this->time_end);
 
         return $diff . ' Minute' . ($diff > 1 ? 's' : '');
     }
-    public function getDurationAttribute() {
+    public function getDurationPrettyAttribute() {
         return $this->attributes['duration'] . ' Hour' . ($this->attributes['duration'] > 1 ? 's' : '');
-    }
-    public function getDurationIntAttribute() {
-        return $this->attributes['duration'];
     }
 
     public static function getOngoing() {

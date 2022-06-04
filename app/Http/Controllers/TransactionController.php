@@ -11,38 +11,32 @@ use App\Models\Computer;
 use App\Models\RentalPrice;
 use Carbon\Carbon;
 
-class TransactionController extends Controller
-{
-    public function index()
-    {
+class TransactionController extends Controller {
+    public function index() {
         return view('transaction.index', [
             'transactions' => Transaction::getOngoing()
         ]);
     }
 
-    public function indexAll()
-    {
+    public function indexAll() {
         return view('transaction.index_all', [
             'transactions' => Transaction::getDone()
         ]);
     }
 
-    public function show(Transaction $transaction)
-    {
+    public function show(Transaction $transaction) {
         return view('transaction.show', [
             'transaction' => $transaction->load(['operator'])
         ]);
     }
 
-    public function create()
-    {
+    public function create() {
         return view('transaction.create', [
             'computers' => Computer::customAll()
         ]);
     }
 
-    public function edit(Transaction $transaction)
-    {
+    public function edit(Transaction $transaction) {
         if (Gate::denies('manage-transaction', $transaction)) abort(403);
 
         return view('transaction.edit', [
@@ -51,8 +45,7 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function store(TransactionStoreRequest $request)
-    {
+    public function store(TransactionStoreRequest $request) {
         $validated = $request->validated();
 
         try {
@@ -74,8 +67,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function update(TransactionUpdateRequest $request, Transaction $transaction)
-    {
+    public function update(TransactionUpdateRequest $request, Transaction $transaction) {
         if (Gate::denies('manage-transaction', $transaction)) abort(403);
 
         $validated = $request->validated();
@@ -96,8 +88,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function extend(Request $request, Transaction $transaction)
-    {
+    public function extend(Request $request, Transaction $transaction) {
         if (Gate::denies('manage-transaction', $transaction)) abort(403);
         if ($transaction->status != "Ongoing") abort(404);
 
@@ -105,11 +96,11 @@ class TransactionController extends Controller
 
         try {
             $transaction->updateOrFail([
-                'time_end' => Carbon::create($transaction->time_end_raw)
+                'time_end' => Carbon::create($transaction->time_end)
                     ->add($validated['duration'], 'hour'),
                 'bill' => $this->calculateBill(
                     $transaction->computer_id,
-                    $transaction->duration_int + $validated['duration']
+                    $transaction->duration + $validated['duration']
                 )
             ]);
 
@@ -123,8 +114,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function destroy(Transaction $transaction)
-    {
+    public function destroy(Transaction $transaction) {
         if (!Gate::allows('manage-transaction', $transaction)) abort(403);
 
         try {
@@ -140,16 +130,15 @@ class TransactionController extends Controller
         }
     }
 
-    private function calculateBill($computer, int $duration)
-    {
+    private function calculateBill($computer, int $duration) {
         $typeId = Computer::find($computer)->type_id;
         $prices = RentalPrice::where('type_id', $typeId)->orderBy('duration', 'desc')->get();
 
         $bill = 0;
 
         foreach ($prices as $price) {
-            $count = (int)($duration / $price->duration_int);
-            $duration -= $count * $price->duration_int;
+            $count = (int)($duration / $price->duration);
+            $duration -= $count * $price->duration;
             $bill += $price->price * $count;
 
             if ($duration == 0) break;
