@@ -24,7 +24,7 @@
             </tbody>
         </table>
         <div class="pt-2">
-            <a href="{{ route('operator.update', $operator->username) }}" class="btn btn-primary">Edit</a>
+            <a href="{{ route('operator.edit', $operator->username) }}" class="btn btn-primary">Edit</a>
             @if($operator->role->name != 'Owner')
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Delete</button>
             <div class="modal fade" id="modalDelete" tabindex="-1">
