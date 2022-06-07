@@ -38,7 +38,12 @@
                         </li>
                         <li class="dropdown-divider"></li>
                         <li class="dropdown-item">
-                            <a href="{{ route('logout') }}" class="link-danger">Logout</a>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="border-0 bg-transparent text-decoration-underline link-danger">
+                                    Logout
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </li>
