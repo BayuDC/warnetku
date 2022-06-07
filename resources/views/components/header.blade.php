@@ -40,8 +40,9 @@
                         <li class="dropdown-item">
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
-                                <input style="border: 0; background-color: transparent; text-decoration: underline"
-                                    class="link-danger" type="submit" value="Logout">
+                                <button type="submit" class="border-0 bg-transparent text-decoration-underline link-danger">
+                                    Logout
+                                </button>
                             </form>
                         </li>
                     </ul>
