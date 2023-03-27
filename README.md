@@ -92,11 +92,11 @@ $ nano .env
 $ php artisan key:generate
 
 # Database migration
-$ php aritsan migrate
+$ php artisan migrate
 # with seed
 $ php artisan migrate --seed
 
-$ Run dev server
+# Run dev server
 $ php artisan serve
 ```
 
