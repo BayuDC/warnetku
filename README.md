@@ -63,15 +63,17 @@ Please clone this and use your machine if you want to try this web app.
 
 ## 📸 Screenshots
 
-![Screenshot1](https://cdn.discordapp.com/attachments/946013429200723989/980702509024837732/Screenshot_from_2022-05-30_11-52-50.png)
-![Screenshot2](https://cdn.discordapp.com/attachments/946013429200723989/980702509293240421/Screenshot_from_2022-05-30_11-53-32.png)
-![Screenshot3](https://cdn.discordapp.com/attachments/946013429200723989/980702509536526346/Screenshot_from_2022-05-30_11-53-41.png)
-![Screenshot4](https://cdn.discordapp.com/attachments/946013429200723989/980702509788180540/Screenshot_from_2022-05-30_11-53-47.png)
-![Screenshot5](https://cdn.discordapp.com/attachments/946013429200723989/980702510018859048/Screenshot_from_2022-05-30_11-54-07.png)
+![image](https://github.com/user-attachments/assets/bbd9ca73-11c3-4d66-810b-da741a317e1a)
+![image](https://github.com/user-attachments/assets/c07cbd16-5e66-48bd-a2da-388fa6e00d18)
+![image](https://github.com/user-attachments/assets/bd7f88cc-1ab6-4118-935b-c13237c51aa9)
+![image](https://github.com/user-attachments/assets/68662b0d-c384-470c-b1c6-c558c64276f0)
+![image](https://github.com/user-attachments/assets/e92e16a1-4859-4985-b4c2-f06101df8b1e)
+
 
 ## 💽 Database Structure
 
-![Database](https://cdn.discordapp.com/attachments/946013429200723989/980702471963934780/drawSQL-export-2022-05-30_11_59.png)
+![image](https://github.com/user-attachments/assets/20e8dc77-1bae-49c3-a105-43e35a414996)
+
 
 ## 🛠️ Development
 
